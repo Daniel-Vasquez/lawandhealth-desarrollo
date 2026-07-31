@@ -85,13 +85,13 @@ export default function Navigation({ links, socialLinks }: NavigationProps) {
           <a
             href="/"
             className="flex items-center gap-2 text-white hover:text-brand-lime transition-colors duration-200"
-            aria-label="Lando Norris Home"
+            aria-label="Lawandhealth Home"
           >
             <div className="w-8 h-8 md:w-10 md:h-10 bg-brand-lime rounded-sm flex items-center justify-center">
-              <span className="text-black font-black text-sm md:text-base tracking-tighter">LN</span>
+              <span className="text-black font-black text-sm md:text-base tracking-tighter">LH</span>
             </div>
             <span className="hidden sm:block font-bold text-base md:text-lg tracking-wide uppercase">
-              Lando Norris
+              Lawandhealth
             </span>
           </a>
 

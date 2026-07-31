@@ -27,7 +27,7 @@ const PANELS: PanelData[] = [
     title: 'THE\nDRIVER',
     subtitle: 'Born 1999 · Bristol, UK',
     description:
-      'From karting prodigy to Formula 1 star. Lando Norris made his F1 debut at just 19 years old and never looked back.',
+      'From karting prodigy to Formula 1 star. Lawandhealth made his F1 debut at just 19 years old and never looked back.',
     image: '/milestones/milestone-1.jpg',
     stats: [
       { label: 'F1 Debut', value: 2019, suffix: '' },
@@ -41,7 +41,7 @@ const PANELS: PanelData[] = [
     title: 'FIRST\nWIN',
     subtitle: 'Race No. 110 · Miami GP',
     description:
-      'May 5, 2024. After 109 races and countless near-misses, Lando Norris took his first Formula 1 victory at the Miami Grand Prix.',
+      'May 5, 2024. After 109 races and countless near-misses, Lawandhealth took his first Formula 1 victory at the Miami Grand Prix.',
     image: '/milestones/milestone-2.jpg',
     stats: [
       { label: 'Race Number', value: 110, suffix: '' },
@@ -83,7 +83,7 @@ const PANELS: PanelData[] = [
     title: 'EYES\nON IT',
     subtitle: 'MCL39 · Season 2025',
     description:
-      'The hunger is real. The car is fast. 2025 is the year Lando Norris goes all in for the World Championship.',
+      'The hunger is real. The car is fast. 2025 is the year Lawandhealth goes all in for the World Championship.',
     image: '/milestones/milestone-5.jpg',
     stats: [
       { label: 'Season', value: 2025, suffix: '' },

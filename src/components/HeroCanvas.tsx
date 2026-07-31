@@ -171,7 +171,7 @@ export default function HeroCanvas({ nextRace = 'Monaco GP', raceDate = 'May 22â
           </div>
 
           <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[100px] font-black uppercase leading-none tracking-tighter text-white mb-4 md:mb-6">
-            Lando<br />Norris
+            Lawandhealth
           </h1>
 
           <p className="text-base md:text-lg lg:text-xl font-medium uppercase tracking-[0.2em] text-brand-lime mb-8 md:mb-10">
@@ -222,7 +222,7 @@ export default function HeroCanvas({ nextRace = 'Monaco GP', raceDate = 'May 22â
           >
             <div className="flex flex-col items-center gap-2">
               <span className="text-xs font-black uppercase tracking-[0.4em] text-brand-lime">#4</span>
-              <span className="text-lg font-black uppercase tracking-widest text-white">Lando Norris</span>
+              <span className="text-lg font-black uppercase tracking-widest text-white">Lawandhealth</span>
             </div>
 
             <div className="relative w-48 h-px bg-white/10 overflow-hidden">
