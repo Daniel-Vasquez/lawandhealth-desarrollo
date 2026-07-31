@@ -2,19 +2,25 @@
 interface Props {
   title: string;
   paragraph: string;
+  theme?: 'dark' | 'light';
 }
 
-const { title, paragraph } = Astro.props;
+const { title, paragraph, theme = 'dark' } = Astro.props;
+const isLight = theme === 'light';
+
+const sectionBg = isLight ? 'bg-white' : 'bg-brand-primary-light/10';
+const headingText = isLight ? 'text-brand-primary' : 'text-white';
+const bodyText = isLight ? 'text-brand-primary/70' : 'text-white/70';
 ---
 
-<section class="reveal relative overflow-hidden py-24 md:py-32 bg-brand-primary-light/10">
+<section class={`reveal relative overflow-hidden py-24 md:py-32 ${sectionBg}`}>
   <!-- Content -->
   <div class="relative z-10 max-w-[900px] mx-auto px-6 lg:px-10 text-center">
     <div class="w-16 h-[2px] bg-brand-secondary mx-auto mb-8"></div>
-    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white leading-tight mb-6">
+    <h2 class={`text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter ${headingText} leading-tight mb-6`}>
       {title}
     </h2>
-    <p class="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+    <p class={`text-base md:text-lg ${bodyText} leading-relaxed max-w-2xl mx-auto`}>
       {paragraph}
     </p>
   </div>

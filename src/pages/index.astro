@@ -189,6 +189,7 @@ const faqItems = [
     <IntroStatement
       title="Protegemos la operación de empresas del sector salud y alimenticio."
       paragraph="La regulación sanitaria influye directamente en la continuidad de una empresa. Law & Health desarrolla estrategias legales y regulatorias para prevenir riesgos, atender procedimientos administrativos y fortalecer el cumplimiento normativo."
+      theme="light"
     />
 
     <FeatureGrid
@@ -196,7 +197,7 @@ const faqItems = [
       eyebrow="Qué hacemos"
       title="Servicios especializados"
       features={services}
-      background="primary"
+      theme="dark"
     />
 
     <FeatureGrid
@@ -204,30 +205,34 @@ const faqItems = [
       eyebrow="Diferenciadores"
       title="¿Por qué elegir Law & Health?"
       features={whyChooseUs}
-      background="tint"
+      theme="light"
     />
 
     <SectorsList
       title="Sectores que asesoramos"
       sectors={sectors}
+      theme="dark"
     />
 
     <ProcessScroll
       title="Nuestro proceso"
       steps={processSteps}
+      theme="light"
     />
 
-    <Partnerships partners={clients} />
+    <Partnerships partners={clients} theme="dark" />
 
     <CaseStudies
       title="Casos de éxito"
       cases={caseStudies}
+      theme="light"
     />
 
     <FAQ
       client:visible
       title="Preguntas frecuentes"
       items={faqItems}
+      theme="dark"
     />
 
     <FinalCTA
@@ -235,6 +240,7 @@ const faqItems = [
       paragraph="Si tu empresa pertenece al sector salud o alimenticio y requiere asesoría en regulación sanitaria, agenda una evaluación con uno de nuestros especialistas. Analizaremos tu situación y definiremos la mejor estrategia para atenderla."
       ctaLabel="Solicitar una evaluación regulatoria"
       ctaHref={CONTACT_MAILTO}
+      theme="light"
     />
   </main>
 

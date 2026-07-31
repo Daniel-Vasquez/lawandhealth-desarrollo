@@ -4,12 +4,21 @@ interface Props {
   paragraph: string;
   ctaLabel: string;
   ctaHref: string;
+  theme?: 'dark' | 'light';
 }
 
-const { title, paragraph, ctaLabel, ctaHref } = Astro.props;
+const { title, paragraph, ctaLabel, ctaHref, theme = 'dark' } = Astro.props;
+const isLight = theme === 'light';
+
+const sectionBg = isLight ? 'bg-white' : 'bg-brand-primary-light/10';
+const headingText = isLight ? 'text-brand-primary' : 'text-white';
+const bodyText = isLight ? 'text-brand-primary/70' : 'text-white/70';
+const ctaClasses = isLight
+  ? 'bg-brand-primary text-white hover:bg-brand-primary-light'
+  : 'bg-brand-secondary text-black hover:bg-white';
 ---
 
-<section id="contacto" class="reveal relative overflow-hidden min-h-[60vh] flex items-center bg-brand-primary-light/10">
+<section id="contacto" class={`reveal relative overflow-hidden min-h-[60vh] flex items-center ${sectionBg}`}>
   <!-- Decorative background -->
   <div class="absolute inset-0 pointer-events-none">
     <div
@@ -30,15 +39,15 @@ const { title, paragraph, ctaLabel, ctaHref } = Astro.props;
 
   <!-- Content -->
   <div class="relative z-10 w-full max-w-[900px] mx-auto px-6 lg:px-10 py-24 text-center">
-    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-white leading-none mb-6">
+    <h2 class={`text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter ${headingText} leading-none mb-6`}>
       {title}
     </h2>
-    <p class="text-base md:text-lg text-white/70 max-w-xl mx-auto mb-10 leading-relaxed">
+    <p class={`text-base md:text-lg ${bodyText} max-w-xl mx-auto mb-10 leading-relaxed`}>
       {paragraph}
     </p>
     <a
       href={ctaHref}
-      class="group inline-flex items-center gap-3 bg-brand-secondary text-black font-black uppercase text-sm tracking-widest px-8 py-4 hover:bg-white transition-colors duration-200"
+      class={`group inline-flex items-center gap-3 ${ctaClasses} font-black uppercase text-sm tracking-widest px-8 py-4 transition-colors duration-200`}
     >
       {ctaLabel}
       <svg
