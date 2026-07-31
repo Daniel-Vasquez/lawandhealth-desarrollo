@@ -4,45 +4,87 @@ interface Props {
   paragraph: string;
   ctaLabel: string;
   ctaHref: string;
-  theme?: 'dark' | 'light';
+  theme?: "dark" | "light";
 }
 
-const { title, paragraph, ctaLabel, ctaHref, theme = 'dark' } = Astro.props;
-const isLight = theme === 'light';
+const { title, paragraph, ctaLabel, ctaHref, theme = "dark" } = Astro.props;
+const isLight = theme === "light";
 
-const sectionBg = isLight ? 'bg-white' : 'bg-brand-primary-light/10';
-const headingText = isLight ? 'text-brand-primary' : 'text-white';
-const bodyText = isLight ? 'text-brand-primary/70' : 'text-white/70';
+const sectionBg = isLight ? "bg-white" : "bg-brand-primary-light/10";
+const headingText = isLight ? "text-brand-primary" : "text-white";
+const bodyText = isLight ? "text-white/70" : "text-brand-primary/70";
 const ctaClasses = isLight
-  ? 'bg-brand-primary text-white hover:bg-brand-primary-light'
-  : 'bg-brand-secondary text-black hover:bg-white';
+  ? "bg-brand-primary text-white hover:bg-brand-primary-light"
+  : "bg-brand-secondary text-black hover:bg-white";
 ---
 
-<section id="contacto" class={`reveal relative overflow-hidden min-h-[60vh] flex items-center ${sectionBg}`}>
+<section
+  id="contacto"
+  class={`reveal relative overflow-hidden min-h-[80vh] flex items-center ${sectionBg}`}
+>
   <!-- Decorative background -->
-  <div class="absolute inset-0 pointer-events-none">
+  <div
+    style={{
+      backgroundImage: "url('images/sección-10-cta-final.webp')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+    class="absolute inset-0 pointer-events-none"
+  >
+    <div
+      class="absolute inset-0"
+      style={{
+        backgroundImage:
+          "linear-gradient(90deg, rgba(255, 255, 255, 0.272) 60%, #ffffff)",
+      }}
+    >
+    </div>
     <div
       class="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full opacity-20 blur-3xl"
-      style={{ background: 'radial-gradient(circle, #0d401b 0%, transparent 70%)' }}
-    ></div>
+      style={{
+        background: "radial-gradient(circle, #0d401b 0%, transparent 70%)",
+      }}
+    >
+    </div>
     <div
       class="absolute top-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-10 blur-3xl"
-      style={{ background: 'radial-gradient(circle, #a6bfac 0%, transparent 70%)' }}
-    ></div>
+      style={{
+        background: "radial-gradient(circle, #a6bfac 0%, transparent 70%)",
+      }}
+    >
+    </div>
   </div>
 
   <!-- Decorative corner accents -->
-  <div class="absolute top-8 left-8 w-12 h-12 border-t-2 border-l-2 border-brand-secondary"></div>
-  <div class="absolute top-8 right-8 w-12 h-12 border-t-2 border-r-2 border-brand-secondary"></div>
-  <div class="absolute bottom-8 left-8 w-12 h-12 border-b-2 border-l-2 border-brand-secondary"></div>
-  <div class="absolute bottom-8 right-8 w-12 h-12 border-b-2 border-r-2 border-brand-secondary"></div>
+  <div
+    class="absolute top-8 left-8 w-12 h-12 border-t-2 border-l-2 border-brand-secondary"
+  >
+  </div>
+  <div
+    class="absolute top-8 right-8 w-12 h-12 border-t-2 border-r-2 border-brand-secondary"
+  >
+  </div>
+  <div
+    class="absolute bottom-8 left-8 w-12 h-12 border-b-2 border-l-2 border-brand-secondary"
+  >
+  </div>
+  <div
+    class="absolute bottom-8 right-8 w-12 h-12 border-b-2 border-r-2 border-brand-secondary"
+  >
+  </div>
 
   <!-- Content -->
-  <div class="relative z-10 w-full max-w-[900px] mx-auto px-6 lg:px-10 py-24 text-center">
-    <h2 class={`text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter ${headingText} leading-none mb-6`}>
+  <div
+    class="relative z-10 w-full max-w-[900px] mx-auto px-6 lg:px-10 py-24 text-center"
+  >
+    <h2
+      class={`text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter ${headingText} leading-none mb-6`}
+    >
       {title}
     </h2>
-    <p class={`text-base md:text-lg ${bodyText} max-w-xl mx-auto mb-10 leading-relaxed`}>
+    <p
+      class={`text-base md:text-lg ${bodyText} max-w-xl mx-auto mb-10 leading-relaxed`}
+    >
       {paragraph}
     </p>
     <a
@@ -57,7 +99,8 @@ const ctaClasses = isLight
         stroke="currentColor"
         stroke-width="3"
       >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+        ></path>
       </svg>
     </a>
   </div>
