@@ -23,17 +23,29 @@ const {
 ---
 
 <section id="inicio" class="js-hero relative w-full min-h-screen flex items-center overflow-hidden pt-24 pb-16 md:pt-0 md:pb-0 bg-brand-primary">
-  <!-- Decorative background -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div
-      class="js-hero-blob absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-20 blur-3xl"
-      style={{ background: 'radial-gradient(circle, #0d401b 0%, transparent 70%)' }}
-    ></div>
-    <div
-      class="js-hero-blob absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full opacity-10 blur-3xl"
-      style={{ background: 'radial-gradient(circle, #a6bfac 0%, transparent 70%)' }}
-    ></div>
-  </div>
+  <!-- Base photo — always visible -->
+  <div
+    class="absolute inset-0 z-0"
+    style={{ backgroundImage: "url('/dani-light.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+  ></div>
+
+  <!-- Reveal photo — only visible inside the cursor-following spotlight -->
+  <div
+    class="js-hero-reveal absolute inset-0 z-[1] pointer-events-none hidden md:block"
+    style={{
+      backgroundImage: "url('/dani-dark.jpeg')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      WebkitMaskImage: 'radial-gradient(circle at -999px -999px, black 0, transparent 0)',
+      maskImage: 'radial-gradient(circle at -999px -999px, black 0, transparent 0)',
+    }}
+  ></div>
+  <canvas class="js-hero-spotlight-canvas hidden"></canvas>
+
+  <!-- Legibility overlay — flat/strong on mobile (text spans full width), side gradient on desktop (text sits left) -->
+  <div class="absolute inset-0 z-[2] bg-brand-primary/80 md:hidden pointer-events-none"></div>
+  <div class="absolute inset-0 z-[2] hidden md:block bg-gradient-to-r from-brand-primary via-brand-primary/75 to-brand-primary/30 pointer-events-none"></div>
+  <div class="absolute inset-0 z-[2] bg-brand-primary/30 pointer-events-none"></div>
 
   <!-- Accent top bar -->
   <div class="absolute top-0 left-0 right-0 h-0.5 bg-brand-secondary z-10"></div>
@@ -103,22 +115,100 @@ const {
       .fromTo('.js-hero-paragraph', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7 }, '<0.2')
       .fromTo('.js-hero-indicator', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08 }, '<0.15')
       .fromTo('.js-hero-cta', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, '<0.1');
-
-    // Scroll-tied parallax on decorative blobs
-    gsap.utils.toArray<HTMLElement>('.js-hero-blob').forEach((blob, i) => {
-      gsap.to(blob, {
-        y: i % 2 === 0 ? 120 : -120,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    });
   };
 
   initHero();
   document.addEventListener('astro:page-load', initHero);
+
+  // ─── Spotlight reveal — cursor-following canvas mask ──────────────
+  // Desktop-only (hover + fine pointer), disabled under reduced-motion.
+  let spotlightCleanup: (() => void) | null = null;
+
+  const initSpotlight = () => {
+    spotlightCleanup?.();
+    spotlightCleanup = null;
+
+    const hero = document.querySelector<HTMLElement>('.js-hero');
+    const revealLayer = document.querySelector<HTMLElement>('.js-hero-reveal');
+    const canvas = document.querySelector<HTMLCanvasElement>('.js-hero-spotlight-canvas');
+    if (!hero || !revealLayer || !canvas) return;
+
+    const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!supportsHover || reducedMotion) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const RADIUS = 260;
+    const mouse = { x: -999, y: -999 };
+    const smooth = { x: -999, y: -999 };
+    let rafId = 0;
+    let active = false;
+
+    const resize = () => {
+      const rect = hero.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      const rect = hero.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      active = true;
+    };
+
+    const onPointerLeave = () => {
+      active = false;
+      mouse.x = -999;
+      mouse.y = -999;
+    };
+
+    const draw = () => {
+      smooth.x += (mouse.x - smooth.x) * 0.1;
+      smooth.y += (mouse.y - smooth.y) * 0.1;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (active || Math.abs(smooth.x - mouse.x) > 0.5) {
+        const grad = ctx.createRadialGradient(smooth.x, smooth.y, 0, smooth.x, smooth.y, RADIUS);
+        grad.addColorStop(0, 'rgba(255,255,255,1)');
+        grad.addColorStop(0.4, 'rgba(255,255,255,1)');
+        grad.addColorStop(0.6, 'rgba(255,255,255,0.75)');
+        grad.addColorStop(0.75, 'rgba(255,255,255,0.4)');
+        grad.addColorStop(0.88, 'rgba(255,255,255,0.12)');
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+
+        ctx.beginPath();
+        ctx.arc(smooth.x, smooth.y, RADIUS, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        const dataUrl = canvas.toDataURL();
+        revealLayer.style.maskImage = `url(${dataUrl})`;
+        (revealLayer.style as any).webkitMaskImage = `url(${dataUrl})`;
+        revealLayer.style.maskSize = '100% 100%';
+        (revealLayer.style as any).webkitMaskSize = '100% 100%';
+      }
+
+      rafId = requestAnimationFrame(draw);
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+    hero.addEventListener('pointermove', onPointerMove);
+    hero.addEventListener('pointerleave', onPointerLeave);
+    rafId = requestAnimationFrame(draw);
+
+    spotlightCleanup = () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', resize);
+      hero.removeEventListener('pointermove', onPointerMove);
+      hero.removeEventListener('pointerleave', onPointerLeave);
+    };
+  };
+
+  initSpotlight();
+  document.addEventListener('astro:page-load', initSpotlight);
 </script>
