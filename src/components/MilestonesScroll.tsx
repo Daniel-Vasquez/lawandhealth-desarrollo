@@ -131,7 +131,7 @@ export default function MilestonesScroll() {
               dotRefs.current.forEach((dot, i) => {
                 if (!dot) return;
                 dot.style.backgroundColor =
-                  i === active ? '#b5f900' : 'rgba(255,255,255,0.2)';
+                  i === active ? '#a6bfac' : 'rgba(255,255,255,0.2)';
                 dot.style.width = i === active ? '28px' : '14px';
               });
             },
@@ -329,7 +329,7 @@ export default function MilestonesScroll() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="milestones" className="relative bg-brand-dark overflow-hidden">
+    <section ref={sectionRef} id="milestones" className="relative bg-brand-primary overflow-hidden">
 
       {/* Horizontal track */}
       <div ref={trackRef} className="flex flex-col md:flex-row">
@@ -357,8 +357,8 @@ export default function MilestonesScroll() {
                 </picture>
               </div>
               {/* Gradient overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/20 pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/30 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/55 to-brand-primary/20 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/85 via-brand-primary/30 to-transparent pointer-events-none" />
             </div>
 
             {/* Year watermark */}
@@ -388,7 +388,7 @@ export default function MilestonesScroll() {
               <div>
                 <span
                   ref={(el) => { tagRefs.current[i] = el; }}
-                  className="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] text-brand-lime"
+                  className="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] text-brand-secondary"
                 >
                   {panel.tag}
                 </span>
@@ -411,7 +411,7 @@ export default function MilestonesScroll() {
                   {/* Lime accent line */}
                   <div
                     ref={(el) => { lineRefs.current[i] = el; }}
-                    className="h-[2px] bg-brand-lime mt-6 origin-left"
+                    className="h-[2px] bg-brand-secondary mt-6 origin-left"
                     style={{ width: '64px' }}
                   />
 
@@ -449,7 +449,7 @@ export default function MilestonesScroll() {
                       </span>
                       {stat.suffix && (
                         <span
-                          className="font-black text-brand-lime"
+                          className="font-black text-brand-secondary"
                           style={{ fontSize: 'clamp(14px, 1.5vw, 22px)' }}
                         >
                           {stat.suffix}
@@ -477,7 +477,7 @@ export default function MilestonesScroll() {
             className="h-[2px] rounded-full transition-all duration-300"
             style={{
               width: i === 0 ? '28px' : '14px',
-              backgroundColor: i === 0 ? '#b5f900' : 'rgba(255,255,255,0.2)',
+              backgroundColor: i === 0 ? '#a6bfac' : 'rgba(255,255,255,0.2)',
             }}
           />
         ))}

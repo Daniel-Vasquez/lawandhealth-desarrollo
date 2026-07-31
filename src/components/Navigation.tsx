@@ -77,17 +77,17 @@ export default function Navigation({ links, socialLinks }: NavigationProps) {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled || isOpen ? 'bg-black/95 backdrop-blur-md' : 'bg-transparent'
+          scrolled || isOpen ? 'bg-brand-primary/95 backdrop-blur-md' : 'bg-transparent'
         }`}
       >
         <nav className="max-w-[1400px] mx-auto px-6 lg:px-10 h-16 md:h-20 flex items-center justify-between">
           {/* Logo */}
           <a
             href="/"
-            className="flex items-center gap-2 text-white hover:text-brand-lime transition-colors duration-200"
+            className="flex items-center gap-2 text-white hover:text-brand-secondary transition-colors duration-200"
             aria-label="Lawandhealth Home"
           >
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-brand-lime rounded-sm flex items-center justify-center">
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-brand-secondary rounded-sm flex items-center justify-center">
               <span className="text-black font-black text-sm md:text-base tracking-tighter">LH</span>
             </div>
             <span className="hidden sm:block font-bold text-base md:text-lg tracking-wide uppercase">
@@ -103,7 +103,7 @@ export default function Navigation({ links, socialLinks }: NavigationProps) {
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
-                  className="text-sm font-semibold uppercase tracking-widest text-white/80 hover:text-brand-lime transition-colors duration-200"
+                  className="text-sm font-semibold uppercase tracking-widest text-white/80 hover:text-brand-secondary transition-colors duration-200"
                 >
                   {link.label}
                 </a>
@@ -120,7 +120,7 @@ export default function Navigation({ links, socialLinks }: NavigationProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="text-white/70 hover:text-brand-lime transition-colors duration-200"
+                className="text-white/70 hover:text-brand-secondary transition-colors duration-200"
               >
                 {socialIconMap[social.name] ?? social.name}
               </a>
@@ -155,7 +155,7 @@ export default function Navigation({ links, socialLinks }: NavigationProps) {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-black flex flex-col transition-all duration-500 lg:hidden ${
+        className={`fixed inset-0 z-40 bg-brand-primary flex flex-col transition-all duration-500 lg:hidden ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -167,7 +167,7 @@ export default function Navigation({ links, socialLinks }: NavigationProps) {
             className="w-full h-full object-cover object-[65%] opacity-85 md:object-center"
           />
           {/* Gradient to darken the image and make text pop */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/90 via-brand-primary/40 to-brand-primary/90" />
         </div>
 
         <div className="relative z-10 flex-1 flex flex-col justify-center px-8 pt-20">
@@ -185,7 +185,7 @@ export default function Navigation({ links, socialLinks }: NavigationProps) {
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
                   onClick={() => setIsOpen(false)}
-                  className={`block text-4xl sm:text-5xl font-black uppercase tracking-tight text-white hover:text-brand-lime transition-all duration-300 py-2 ${
+                  className={`block text-4xl sm:text-5xl font-black uppercase tracking-tight text-white hover:text-brand-secondary transition-all duration-300 py-2 ${
                     isOpen ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
                   }`}
                   style={{ transitionDelay: isOpen ? `${i * 60 + 100}ms` : '0ms' }}
@@ -205,7 +205,7 @@ export default function Navigation({ links, socialLinks }: NavigationProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="text-white/60 hover:text-brand-lime transition-colors duration-200"
+                className="text-white/60 hover:text-brand-secondary transition-colors duration-200"
               >
                 {socialIconMap[social.name] ?? social.name}
               </a>
@@ -214,7 +214,7 @@ export default function Navigation({ links, socialLinks }: NavigationProps) {
         </div>
 
         {/* Bottom accent line */}
-        <div className="h-1 bg-brand-lime" />
+        <div className="h-1 bg-brand-secondary" />
       </div>
     </>
   );

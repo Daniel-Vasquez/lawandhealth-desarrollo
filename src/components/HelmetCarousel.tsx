@@ -80,11 +80,11 @@ export default function HelmetCarousel({ helmets }: HelmetCarouselProps) {
   };
 
   return (
-    <section className="bg-black py-20 md:py-28 overflow-hidden">
+    <section className="bg-brand-primary py-20 md:py-28 overflow-hidden">
       {/* Header */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 mb-12 flex items-end justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-lime mb-2">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-2">
             Collection
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-white leading-none">
@@ -97,7 +97,7 @@ export default function HelmetCarousel({ helmets }: HelmetCarouselProps) {
           <button
             onClick={handlePrev}
             disabled={activeIndex === 0}
-            className="w-12 h-12 border border-white/20 flex items-center justify-center text-white hover:border-brand-lime hover:text-brand-lime disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
+            className="w-12 h-12 border border-white/20 flex items-center justify-center text-white hover:border-brand-secondary hover:text-brand-secondary disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
             aria-label="Previous helmet"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -107,7 +107,7 @@ export default function HelmetCarousel({ helmets }: HelmetCarouselProps) {
           <button
             onClick={handleNext}
             disabled={activeIndex === helmets.length - 1}
-            className="w-12 h-12 border border-white/20 flex items-center justify-center text-white hover:border-brand-lime hover:text-brand-lime disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
+            className="w-12 h-12 border border-white/20 flex items-center justify-center text-white hover:border-brand-secondary hover:text-brand-secondary disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
             aria-label="Next helmet"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -153,12 +153,12 @@ export default function HelmetCarousel({ helmets }: HelmetCarouselProps) {
               />
               {/* Active indicator */}
               {i === activeIndex && (
-                <div className="absolute inset-0 border-2 border-brand-lime pointer-events-none" />
+                <div className="absolute inset-0 border-2 border-brand-secondary pointer-events-none" />
               )}
             </div>
 
             <div className="px-1">
-              <p className="text-xs font-bold text-brand-lime uppercase tracking-widest mb-1">{helmet.year}</p>
+              <p className="text-xs font-bold text-brand-secondary uppercase tracking-widest mb-1">{helmet.year}</p>
               <p className="text-lg font-black uppercase tracking-tight text-white">{helmet.name}</p>
             </div>
           </button>
@@ -173,7 +173,7 @@ export default function HelmetCarousel({ helmets }: HelmetCarouselProps) {
             onClick={() => scrollToIndex(i)}
             className={`transition-all duration-300 rounded-full ${
               i === activeIndex
-                ? 'w-6 h-1.5 bg-brand-lime'
+                ? 'w-6 h-1.5 bg-brand-secondary'
                 : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
             }`}
             aria-label={`Go to helmet ${i + 1}`}

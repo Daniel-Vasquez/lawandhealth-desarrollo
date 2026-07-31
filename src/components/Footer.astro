@@ -20,19 +20,19 @@ const socialLinks = [
 ];
 ---
 
-<footer class="bg-black border-t border-white/10">
+<footer class="bg-brand-primary border-t border-white/10">
   <!-- Top section -->
   <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-16 md:py-20">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
       <!-- Brand -->
       <div>
         <div class="flex items-center gap-3 mb-6">
-          <div class="w-10 h-10 bg-brand-lime flex items-center justify-center">
+          <div class="w-10 h-10 bg-brand-secondary flex items-center justify-center">
             <span class="text-black font-black text-base tracking-tighter">LH</span>
           </div>
           <div>
             <p class="font-black text-white uppercase tracking-wider text-sm">Lawandhealth</p>
-            <p class="text-brand-gray text-xs uppercase tracking-widest">#4 McLaren F1</p>
+            <p class="text-brand-secondary text-xs uppercase tracking-widest">#4 McLaren F1</p>
           </div>
         </div>
         <p class="text-white/40 text-sm leading-relaxed max-w-xs">
@@ -42,7 +42,7 @@ const socialLinks = [
 
       <!-- Navigation -->
       <div>
-        <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brand-lime mb-6">Navigate</h3>
+        <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-6">Navigate</h3>
         <ul class="flex flex-col gap-3">
           {
             navLinks.map((link) => (
@@ -63,7 +63,7 @@ const socialLinks = [
 
       <!-- Social -->
       <div>
-        <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brand-lime mb-6">Social</h3>
+        <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-6">Social</h3>
         <ul class="flex flex-col gap-3">
           {
             socialLinks.map((social) => (
@@ -72,11 +72,11 @@ const socialLinks = [
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex items-center gap-2 text-white/50 hover:text-brand-lime text-sm font-medium transition-colors duration-200 group"
+                  class="flex items-center gap-2 text-white/50 hover:text-brand-secondary text-sm font-medium transition-colors duration-200 group"
                 >
                   <span class="uppercase tracking-widest">{social.name}</span>
-                  <span class="text-white/20 group-hover:text-brand-lime/40 text-xs">·</span>
-                  <span class="text-white/30 group-hover:text-brand-lime/60 text-xs">{social.handle}</span>
+                  <span class="text-white/20 group-hover:text-brand-secondary/40 text-xs">·</span>
+                  <span class="text-white/30 group-hover:text-brand-secondary/60 text-xs">{social.handle}</span>
                 </a>
               </li>
             ))
@@ -104,5 +104,5 @@ const socialLinks = [
   </div>
 
   <!-- Lime bottom line -->
-  <div class="h-0.5 bg-brand-lime"></div>
+  <div class="h-0.5 bg-brand-secondary"></div>
 </footer>

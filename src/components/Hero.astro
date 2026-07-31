@@ -18,19 +18,19 @@ const { nextRace = 'Monaco GP', raceDate = 'May 22–25' } = Astro.props;
       fetchpriority="high"
     />
     <!-- Gradient overlay: bottom-heavy for text legibility -->
-    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/30 to-transparent"></div>
     <!-- Side vignette -->
-    <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/40 via-transparent to-brand-primary/20"></div>
   </div>
 
   <!-- Lime accent top bar -->
-  <div class="absolute top-0 left-0 right-0 h-0.5 bg-brand-lime z-10"></div>
+  <div class="absolute top-0 left-0 right-0 h-0.5 bg-brand-secondary z-10"></div>
 
   <!-- Hero content -->
   <div class="relative z-10 h-full flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
     <!-- Driver number badge -->
     <div class="mb-4">
-      <span class="inline-block bg-brand-lime text-black text-xs font-black uppercase tracking-widest px-3 py-1">
+      <span class="inline-block bg-brand-secondary text-black text-xs font-black uppercase tracking-widest px-3 py-1">
         #4
       </span>
     </div>
@@ -41,7 +41,7 @@ const { nextRace = 'Monaco GP', raceDate = 'May 22–25' } = Astro.props;
     </h1>
 
     <!-- Subtitle -->
-    <p class="text-base md:text-lg lg:text-xl font-medium uppercase tracking-[0.2em] text-brand-lime mb-8 md:mb-10">
+    <p class="text-base md:text-lg lg:text-xl font-medium uppercase tracking-[0.2em] text-brand-secondary mb-8 md:mb-10">
       2025 McLaren Formula 1 Driver
     </p>
 
@@ -49,7 +49,7 @@ const { nextRace = 'Monaco GP', raceDate = 'May 22–25' } = Astro.props;
     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
       <a
         href="#on-track"
-        class="group inline-flex items-center gap-3 bg-brand-lime text-black font-black uppercase text-sm tracking-widest px-6 py-4 hover:bg-white transition-colors duration-200"
+        class="group inline-flex items-center gap-3 bg-brand-secondary text-black font-black uppercase text-sm tracking-widest px-6 py-4 hover:bg-white transition-colors duration-200"
       >
         Explore Season
         <svg
@@ -65,9 +65,9 @@ const { nextRace = 'Monaco GP', raceDate = 'May 22–25' } = Astro.props;
 
       <!-- Next race pill -->
       <div class="flex items-center gap-3 text-white/90">
-        <div class="w-2 h-2 rounded-full bg-brand-lime animate-pulse"></div>
+        <div class="w-2 h-2 rounded-full bg-brand-secondary animate-pulse"></div>
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-brand-gray-light opacity-70">Next Race</p>
+          <p class="text-xs font-semibold uppercase tracking-widest text-brand-secondary-light opacity-70">Next Race</p>
           <p class="text-sm font-bold">{nextRace} · {raceDate}</p>
         </div>
       </div>
