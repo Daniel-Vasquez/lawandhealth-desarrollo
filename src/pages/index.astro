@@ -1,163 +1,182 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation';
-import Hero from '../components/Hero.astro';
-import ChallengesGrid from '../components/ChallengesGrid.astro';
-import IntroStatement from '../components/IntroStatement.astro';
-import FeatureGrid from '../components/FeatureGrid.astro';
-import SectorsList from '../components/SectorsList.astro';
-import ProcessScroll from '../components/ProcessScroll.astro';
-import Partnerships from '../components/Partnerships.astro';
-import CaseStudies from '../components/CaseStudies.astro';
-import FAQ from '../components/FAQ';
-import FinalCTA from '../components/FinalCTA.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation";
+import Hero from "../components/Hero.astro";
+import ChallengesGrid from "../components/ChallengesGrid.astro";
+import IntroStatement from "../components/IntroStatement.astro";
+import FeatureGrid from "../components/FeatureGrid.astro";
+import SectorsList from "../components/SectorsList.astro";
+import ProcessScroll from "../components/ProcessScroll.astro";
+import Partnerships from "../components/Partnerships.astro";
+import CaseStudies from "../components/CaseStudies.astro";
+import FAQ from "../components/FAQ";
+import FinalCTA from "../components/FinalCTA.astro";
+import Footer from "../components/Footer.astro";
 
-const CONTACT_HREF = '#contacto';
-const CONTACT_MAILTO = 'mailto:contacto@lawandhealth.mx';
+const CONTACT_HREF = "#contacto";
+const CONTACT_MAILTO = "mailto:contacto@lawandhealth.mx";
 
 const navLinks = [
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Sectores', href: '#sectores' },
-  { label: 'Proceso', href: '#proceso' },
-  { label: 'Casos de Éxito', href: '#casos-de-exito' },
-  { label: 'FAQ', href: '#faq' },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Sectores", href: "#sectores" },
+  { label: "Proceso", href: "#proceso" },
+  { label: "Casos de Éxito", href: "#casos-de-exito" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 const heroIndicators = [
-  { label: 'Más de 150 empresas atendidas.' },
-  { label: 'Especialistas en Regulación Sanitaria.' },
-  { label: 'Atención en toda la República Mexicana.' },
-  { label: 'Respuesta en menos de 24 horas.' },
+  { label: "Más de 150 empresas atendidas." },
+  { label: "Especialistas en Regulación Sanitaria." },
+  { label: "Atención en toda la República Mexicana." },
+  { label: "Respuesta en menos de 24 horas." },
 ];
 
 const challenges = [
-  { title: 'Verificación sanitaria' },
-  { title: 'Suspensión de actividades' },
-  { title: 'Multas administrativas' },
-  { title: 'Apertura de establecimientos' },
-  { title: 'Regularización documental' },
-  { title: 'Permisos y autorizaciones' },
-  { title: 'Publicidad de productos o servicios regulados' },
-  { title: 'Certificaciones' },
+  { title: "Verificación sanitaria" },
+  { title: "Suspensión de actividades" },
+  { title: "Multas administrativas" },
+  { title: "Apertura de establecimientos" },
+  { title: "Regularización documental" },
+  { title: "Permisos y autorizaciones" },
+  { title: "Publicidad de productos o servicios regulados" },
+  { title: "Certificaciones" },
 ];
 
 const services = [
   {
-    title: 'Cumplimiento regulatorio',
-    description: 'Asesoría para cumplir con la normativa sanitaria aplicable.',
+    title: "Cumplimiento regulatorio",
+    description: "Asesoría para cumplir con la normativa sanitaria aplicable.",
   },
   {
-    title: 'Permisos, licencias y autorizaciones',
-    description: 'Gestión e integración de expedientes para procesos regulatorios.',
+    title: "Permisos, licencias y autorizaciones",
+    description:
+      "Gestión e integración de expedientes para procesos regulatorios.",
   },
   {
-    title: 'Atención de verificaciones',
-    description: 'Acompañamiento durante verificaciones sanitarias y requerimientos de la autoridad.',
+    title: "Atención de verificaciones",
+    description:
+      "Acompañamiento durante verificaciones sanitarias y requerimientos de la autoridad.",
   },
   {
-    title: 'Defensa administrativa',
-    description: 'Atención de multas, procedimientos administrativos y medios de defensa.',
+    title: "Defensa administrativa",
+    description:
+      "Atención de multas, procedimientos administrativos y medios de defensa.",
   },
 ];
 
 const whyChooseUs = [
   {
-    title: 'Especialización',
-    description: 'Equipo conformado por especialistas en distintas áreas de la Regulación Sanitaria.',
+    title: "Especialización",
+    description:
+      "Equipo conformado por especialistas en distintas áreas de la Regulación Sanitaria.",
   },
   {
-    title: 'Experiencia',
-    description: 'Más de 150 empresas atendidas desde 2018.',
+    title: "Experiencia",
+    description: "Más de 150 empresas atendidas desde 2018.",
   },
   {
-    title: 'Atención personalizada',
-    description: 'Estrategias desarrolladas con base en la situación y necesidades de cada empresa.',
+    title: "Atención personalizada",
+    description:
+      "Estrategias desarrolladas con base en la situación y necesidades de cada empresa.",
   },
   {
-    title: 'Cobertura nacional',
-    description: 'Atención para empresas de toda la República Mexicana.',
+    title: "Cobertura nacional",
+    description: "Atención para empresas de toda la República Mexicana.",
   },
 ];
 
 const sectors = [
   {
-    title: 'Sector Salud',
+    title: "Sector Salud",
     items: [
-      'Hospitales',
-      'Clínicas',
-      'Consultorios',
-      'Laboratorios',
-      'Farmacias',
-      'Servicios de diagnóstico',
-      'Distribuidores de medicamentos',
-      'Dispositivos médicos',
+      "Hospitales",
+      "Clínicas",
+      "Consultorios",
+      "Laboratorios",
+      "Farmacias",
+      "Servicios de diagnóstico",
+      "Distribuidores de medicamentos",
+      "Dispositivos médicos",
     ],
   },
   {
-    title: 'Sector Alimenticio',
+    title: "Sector Alimenticio",
     items: [
-      'Fabricantes',
-      'Productores',
-      'Comercializadores',
-      'Restaurantes',
-      'Bebidas alcohólicas',
-      'Suplementos alimenticios',
+      "Fabricantes",
+      "Productores",
+      "Comercializadores",
+      "Restaurantes",
+      "Bebidas alcohólicas",
+      "Suplementos alimenticios",
     ],
   },
 ];
 
 const processSteps = [
-  { title: 'Evaluación del caso', description: 'Analizamos la situación y los objetivos de la empresa.' },
-  { title: 'Estrategia regulatoria', description: 'Definimos el plan de acción.' },
-  { title: 'Implementación', description: 'Ejecutamos el procedimiento y acompañamos el proceso.' },
   {
-    title: 'Seguimiento',
-    description: 'Brindamos apoyo continuo conforme a las necesidades regulatorias del cliente.',
+    title: "Evaluación del caso",
+    description: "Analizamos la situación y los objetivos de la empresa.",
+    image: "/milestones/milestone-1.jpg",
+  },
+  {
+    title: "Estrategia regulatoria",
+    description: "Definimos el plan de acción.",
+    image: "/milestones/milestone-2.jpg",
+  },
+  {
+    title: "Implementación",
+    description: "Ejecutamos el procedimiento y acompañamos el proceso.",
+    image: "/milestones/milestone-3.jpg",
+  },
+  {
+    title: "Seguimiento",
+    description:
+      "Brindamos apoyo continuo conforme a las necesidades regulatorias del cliente.",
+    image: "/milestones/milestone-4.jpg",
   },
 ];
 
 // Pendiente: sustituir por los logotipos reales una vez autorizados por cada cliente.
 const clients = Array.from({ length: 10 }, (_, i) => ({
-  name: `Empresa ${String(i + 1).padStart(2, '0')}`,
+  name: `Empresa ${String(i + 1).padStart(2, "0")}`,
 }));
 
 // Pendiente: sustituir por los tres casos de éxito reales (Problema / Solución / Resultado).
 const caseStudies = [
   {
-    problema: 'Contenido pendiente de definir con el cliente.',
-    solucion: 'Contenido pendiente de definir con el cliente.',
-    resultado: 'Contenido pendiente de definir con el cliente.',
+    problema: "Contenido pendiente de definir con el cliente.",
+    solucion: "Contenido pendiente de definir con el cliente.",
+    resultado: "Contenido pendiente de definir con el cliente.",
   },
   {
-    problema: 'Contenido pendiente de definir con el cliente.',
-    solucion: 'Contenido pendiente de definir con el cliente.',
-    resultado: 'Contenido pendiente de definir con el cliente.',
+    problema: "Contenido pendiente de definir con el cliente.",
+    solucion: "Contenido pendiente de definir con el cliente.",
+    resultado: "Contenido pendiente de definir con el cliente.",
   },
   {
-    problema: 'Contenido pendiente de definir con el cliente.',
-    solucion: 'Contenido pendiente de definir con el cliente.',
-    resultado: 'Contenido pendiente de definir con el cliente.',
+    problema: "Contenido pendiente de definir con el cliente.",
+    solucion: "Contenido pendiente de definir con el cliente.",
+    resultado: "Contenido pendiente de definir con el cliente.",
   },
 ];
 
 // Pendiente: redactar las respuestas definitivas de cada pregunta.
 const faqItems = [
   {
-    question: '¿Atienden empresas de toda la República Mexicana?',
-    answer: 'Respuesta pendiente de redactar por el equipo de Law & Health.',
+    question: "¿Atienden empresas de toda la República Mexicana?",
+    answer: "Respuesta pendiente de redactar por el equipo de Law & Health.",
   },
   {
-    question: '¿Atienden procedimientos urgentes?',
-    answer: 'Respuesta pendiente de redactar por el equipo de Law & Health.',
+    question: "¿Atienden procedimientos urgentes?",
+    answer: "Respuesta pendiente de redactar por el equipo de Law & Health.",
   },
   {
-    question: '¿Qué sucede después de enviar el formulario?',
-    answer: 'Respuesta pendiente de redactar por el equipo de Law & Health.',
+    question: "¿Qué sucede después de enviar el formulario?",
+    answer: "Respuesta pendiente de redactar por el equipo de Law & Health.",
   },
   {
-    question: '¿Cuánto tiempo tarda el primer contacto?',
-    answer: 'Respuesta pendiente de redactar por el equipo de Law & Health.',
+    question: "¿Cuánto tiempo tarda el primer contacto?",
+    answer: "Respuesta pendiente de redactar por el equipo de Law & Health.",
   },
 ];
 ---
@@ -214,19 +233,11 @@ const faqItems = [
       theme="dark"
     />
 
-    <ProcessScroll
-      title="Nuestro proceso"
-      steps={processSteps}
-      theme="light"
-    />
+    <ProcessScroll title="Nuestro proceso" steps={processSteps} theme="light" />
 
     <Partnerships partners={clients} theme="dark" />
 
-    <CaseStudies
-      title="Casos de éxito"
-      cases={caseStudies}
-      theme="light"
-    />
+    <CaseStudies title="Casos de éxito" cases={caseStudies} theme="light" />
 
     <FAQ
       client:visible

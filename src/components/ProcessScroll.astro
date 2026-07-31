@@ -2,6 +2,7 @@
 interface Step {
   title: string;
   description: string;
+  image?: string;
 }
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 
 const { eyebrow = 'Metodología', title, steps, theme = 'dark' } = Astro.props;
 const isLight = theme === 'light';
+const hasAnyImage = steps.some((s) => s.image);
 
 const sectionBg = isLight ? 'bg-white' : 'bg-brand-primary-light/10';
 const eyebrowText = isLight ? 'text-brand-primary-light' : 'text-brand-secondary';
@@ -21,8 +23,18 @@ const tagText = isLight ? 'text-brand-primary-light' : 'text-brand-secondary';
 const stepTitleText = isLight ? 'text-brand-primary' : 'text-white';
 const stepDescText = isLight ? 'text-brand-primary/70' : 'text-white/60';
 const watermarkColor = isLight ? 'rgba(2,28,8,0.05)' : 'rgba(166,191,172,0.06)';
-const dotActive = isLight ? '#0d401b' : '#a6bfac';
-const dotInactive = isLight ? 'rgba(2,28,8,0.15)' : 'rgba(255,255,255,0.2)';
+
+// Panels with a background photo always use light-on-dark-overlay text,
+// regardless of the section theme, since the photo needs a dark scrim.
+const photoTagText = 'text-brand-secondary';
+const photoTitleText = 'text-white';
+const photoDescText = 'text-white/70';
+const photoWatermarkColor = 'rgba(255,255,255,0.08)';
+
+// If any panel carries a photo, the shared progress dots switch to the
+// light-on-dark palette so they stay visible against the photo panels.
+const dotActive = isLight && !hasAnyImage ? '#0d401b' : '#a6bfac';
+const dotInactive = isLight && !hasAnyImage ? 'rgba(2,28,8,0.15)' : 'rgba(255,255,255,0.2)';
 ---
 
 <section
@@ -31,35 +43,54 @@ const dotInactive = isLight ? 'rgba(2,28,8,0.15)' : 'rgba(255,255,255,0.2)';
   data-dot-active={dotActive}
   data-dot-inactive={dotInactive}
 >
-  <!-- Section heading — scrolls in normally, above the pinned track -->
-  <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 pt-20 md:pt-28 pb-10 md:pb-14">
-    <p class={`text-xs font-bold uppercase tracking-[0.3em] ${eyebrowText} mb-3`}>{eyebrow}</p>
-    <h2 class={`text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter ${headingText} leading-tight`}>
-      {title}
-    </h2>
-  </div>
-
   <!-- Horizontal track -->
   <div class="js-process-track flex flex-col md:flex-row">
     {
       steps.map((step, i) => (
-        <div class="js-process-panel relative w-full md:w-screen h-[70vh] md:h-[60vh] flex-shrink-0 overflow-hidden flex items-center">
+        <div class="js-process-panel relative w-full md:w-screen h-screen flex-shrink-0 overflow-hidden flex items-center">
+          {step.image && (
+            <div class="absolute inset-0 z-0">
+              <picture class="w-full h-full block">
+                <source media="(max-width: 767px)" srcset={step.image.replace('.jpg', '-mobile.jpg')} />
+                <img
+                  src={step.image}
+                  alt=""
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </picture>
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/70 to-brand-primary/40" />
+              <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/85 via-brand-primary/25 to-transparent" />
+            </div>
+          )}
+
+          {i === 0 && (
+            <div class="absolute top-24 left-6 md:top-28 md:left-16 lg:left-20 z-20">
+              <p class={`text-xs font-bold uppercase tracking-[0.3em] ${step.image ? photoTagText : eyebrowText} mb-3`}>
+                {eyebrow}
+              </p>
+              <h2 class={`text-2xl md:text-3xl font-black uppercase tracking-tighter ${step.image ? photoTitleText : headingText} leading-tight`}>
+                {title}
+              </h2>
+            </div>
+          )}
+
           <!-- Index watermark -->
           <div
             aria-hidden="true"
             class="absolute right-6 bottom-6 font-black leading-none select-none pointer-events-none"
-            style={{ fontSize: 'clamp(120px, 20vw, 260px)', color: watermarkColor }}
+            style={{ fontSize: 'clamp(120px, 20vw, 260px)', color: step.image ? photoWatermarkColor : watermarkColor }}
           >
             {String(i + 1).padStart(2, '0')}
           </div>
 
           <div class="relative z-10 px-6 md:px-16 lg:px-20 max-w-xl">
-            <span class={`js-process-tag text-[10px] md:text-xs font-black uppercase tracking-[0.4em] ${tagText}`}>
+            <span class={`js-process-tag text-[10px] md:text-xs font-black uppercase tracking-[0.4em] ${step.image ? photoTagText : tagText}`}>
               Paso {String(i + 1).padStart(2, '0')}
             </span>
 
             <h3
-              class={`js-process-title font-black uppercase leading-[0.95] ${stepTitleText} mt-4`}
+              class={`js-process-title font-black uppercase leading-[0.95] ${step.image ? photoTitleText : stepTitleText} mt-4`}
               style={{ fontSize: 'clamp(36px, 5vw, 72px)' }}
             >
               {step.title}
@@ -67,7 +98,7 @@ const dotInactive = isLight ? 'rgba(2,28,8,0.15)' : 'rgba(255,255,255,0.2)';
 
             <div class="js-process-line h-[2px] bg-brand-secondary mt-6 origin-left" style={{ width: '64px' }} />
 
-            <p class={`js-process-desc text-base md:text-lg ${stepDescText} mt-6 leading-relaxed max-w-md`}>
+            <p class={`js-process-desc text-base md:text-lg ${step.image ? photoDescText : stepDescText} mt-6 leading-relaxed max-w-md`}>
               {step.description}
             </p>
           </div>
