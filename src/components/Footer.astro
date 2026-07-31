@@ -11,12 +11,10 @@ interface Props {
 
 const { navLinks } = Astro.props;
 
-const socialLinks = [
-  { name: 'Instagram', href: 'https://www.instagram.com/lawandhealth', handle: '@lawandhealth' },
-  { name: 'TikTok', href: 'https://www.tiktok.com/@lawandhealth', handle: '@lawandhealth' },
-  { name: 'YouTube', href: 'https://www.youtube.com/lawandhealth', handle: 'Lawandhealth' },
-  { name: 'X', href: 'https://twitter.com/lawandhealth', handle: '@lawandhealth' },
-  { name: 'Twitch', href: 'https://www.twitch.tv/lawandhealth', handle: 'lawandhealth' },
+const contactDetails = [
+  { label: 'Correo', value: 'contacto@lawandhealth.mx', href: 'mailto:contacto@lawandhealth.mx' },
+  { label: 'Teléfono', value: '+52 (55) 0000 0000', href: 'tel:+525500000000' },
+  { label: 'Cobertura', value: 'Toda la República Mexicana' },
 ];
 ---
 
@@ -31,18 +29,18 @@ const socialLinks = [
             <span class="text-black font-black text-base tracking-tighter">LH</span>
           </div>
           <div>
-            <p class="font-black text-white uppercase tracking-wider text-sm">Lawandhealth</p>
-            <p class="text-brand-secondary text-xs uppercase tracking-widest">#4 McLaren F1</p>
+            <p class="font-black text-white uppercase tracking-wider text-sm">Law &amp; Health</p>
+            <p class="text-brand-secondary text-xs uppercase tracking-widest">Regulación Sanitaria</p>
           </div>
         </div>
         <p class="text-white/40 text-sm leading-relaxed max-w-xs">
-          Official website of Lawandhealth — 2025 McLaren Formula 1 Driver. Racing, lifestyle, and more.
+          Asesoría especializada en regulación sanitaria para empresas del sector salud y alimenticio en toda la República Mexicana.
         </p>
       </div>
 
       <!-- Navigation -->
       <div>
-        <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-6">Navigate</h3>
+        <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-6">Navegación</h3>
         <ul class="flex flex-col gap-3">
           {
             navLinks.map((link) => (
@@ -61,23 +59,23 @@ const socialLinks = [
         </ul>
       </div>
 
-      <!-- Social -->
+      <!-- Contact -->
       <div>
-        <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-6">Social</h3>
+        <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-6">Contacto</h3>
         <ul class="flex flex-col gap-3">
           {
-            socialLinks.map((social) => (
+            contactDetails.map((item) => (
               <li>
-                <a
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-2 text-white/50 hover:text-brand-secondary text-sm font-medium transition-colors duration-200 group"
-                >
-                  <span class="uppercase tracking-widest">{social.name}</span>
-                  <span class="text-white/20 group-hover:text-brand-secondary/40 text-xs">·</span>
-                  <span class="text-white/30 group-hover:text-brand-secondary/60 text-xs">{social.handle}</span>
-                </a>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    class="text-white/50 hover:text-white text-sm font-medium transition-colors duration-200"
+                  >
+                    {item.value}
+                  </a>
+                ) : (
+                  <span class="text-white/50 text-sm font-medium">{item.value}</span>
+                )}
               </li>
             ))
           }
@@ -90,19 +88,19 @@ const socialLinks = [
   <div class="border-t border-white/5">
     <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-white/20 text-xs uppercase tracking-widest">
-        &copy; {new Date().getFullYear()} Lawandhealth. All rights reserved.
+        &copy; {new Date().getFullYear()} Law &amp; Health. Todos los derechos reservados.
       </p>
       <div class="flex items-center gap-6">
         <a href="#" class="text-white/20 hover:text-white/50 text-xs uppercase tracking-widest transition-colors duration-200">
-          Privacy Policy
+          Aviso de Privacidad
         </a>
         <a href="#" class="text-white/20 hover:text-white/50 text-xs uppercase tracking-widest transition-colors duration-200">
-          Terms of Use
+          Términos de Uso
         </a>
       </div>
     </div>
   </div>
 
-  <!-- Lime bottom line -->
+  <!-- Accent line -->
   <div class="h-0.5 bg-brand-secondary"></div>
 </footer>

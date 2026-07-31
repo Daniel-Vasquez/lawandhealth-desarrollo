@@ -1,0 +1,189 @@
+---
+interface Step {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  steps: Step[];
+}
+
+const { eyebrow = 'Metodología', title, steps } = Astro.props;
+---
+
+<section id="proceso" class="js-process relative bg-brand-primary-light/10 overflow-hidden">
+  <!-- Section heading — scrolls in normally, above the pinned track -->
+  <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 pt-20 md:pt-28 pb-10 md:pb-14">
+    <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-3">{eyebrow}</p>
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white leading-tight">
+      {title}
+    </h2>
+  </div>
+
+  <!-- Horizontal track -->
+  <div class="js-process-track flex flex-col md:flex-row">
+    {
+      steps.map((step, i) => (
+        <div class="js-process-panel relative w-full md:w-screen h-[70vh] md:h-[60vh] flex-shrink-0 overflow-hidden flex items-center">
+          <!-- Index watermark -->
+          <div
+            aria-hidden="true"
+            class="absolute right-6 bottom-6 font-black leading-none select-none pointer-events-none"
+            style={{ fontSize: 'clamp(120px, 20vw, 260px)', color: 'rgba(166,191,172,0.06)' }}
+          >
+            {String(i + 1).padStart(2, '0')}
+          </div>
+
+          <div class="relative z-10 px-6 md:px-16 lg:px-20 max-w-xl">
+            <span class="js-process-tag text-[10px] md:text-xs font-black uppercase tracking-[0.4em] text-brand-secondary">
+              Paso {String(i + 1).padStart(2, '0')}
+            </span>
+
+            <h3
+              class="js-process-title font-black uppercase leading-[0.95] text-white mt-4"
+              style={{ fontSize: 'clamp(36px, 5vw, 72px)' }}
+            >
+              {step.title}
+            </h3>
+
+            <div class="js-process-line h-[2px] bg-brand-secondary mt-6 origin-left" style={{ width: '64px' }} />
+
+            <p class="js-process-desc text-base md:text-lg text-white/60 mt-6 leading-relaxed max-w-md">
+              {step.description}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Progress indicator — desktop only -->
+  <div class="js-process-dots absolute bottom-6 left-1/2 -translate-x-1/2 z-30 hidden md:flex items-center gap-2">
+    {
+      steps.map((_, i) => (
+        <div
+          class="js-process-dot h-[2px] rounded-full transition-all duration-300"
+          style={{ width: i === 0 ? '28px' : '14px', backgroundColor: i === 0 ? '#a6bfac' : 'rgba(255,255,255,0.2)' }}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initProcessScroll = () => {
+    const section = document.querySelector<HTMLElement>('.js-process');
+    const track = document.querySelector<HTMLElement>('.js-process-track');
+    if (!section || !track) return;
+
+    const panels = Array.from(track.querySelectorAll<HTMLElement>('.js-process-panel'));
+    const dots = Array.from(section.querySelectorAll<HTMLElement>('.js-process-dot'));
+
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      // ─── DESKTOP: pin + horizontal scroll ───────────────────────────
+      mm.add('(min-width: 768px)', () => {
+        track.style.width = `${panels.length * 100}vw`;
+
+        const scrollTween = gsap.to(track, {
+          x: () => -(track.scrollWidth - window.innerWidth),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            pin: true,
+            scrub: 1.5,
+            end: () => `+=${track.scrollWidth - window.innerWidth}`,
+            invalidateOnRefresh: true,
+            onUpdate(self) {
+              const active = Math.round(self.progress * (panels.length - 1));
+              dots.forEach((dot, i) => {
+                dot.style.backgroundColor = i === active ? '#a6bfac' : 'rgba(255,255,255,0.2)';
+                dot.style.width = i === active ? '28px' : '14px';
+              });
+            },
+          },
+        });
+
+        panels.forEach((panel) => {
+          const common = {
+            trigger: panel,
+            containerAnimation: scrollTween,
+            toggleActions: 'play none none reverse' as const,
+          };
+
+          const tag = panel.querySelector('.js-process-tag');
+          if (tag) {
+            gsap.fromTo(
+              tag,
+              { opacity: 0, x: -28 },
+              { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out', scrollTrigger: { ...common, start: 'left 82%' } }
+            );
+          }
+
+          const title = panel.querySelector('.js-process-title');
+          if (title) {
+            gsap.fromTo(
+              title,
+              { y: 60, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.9, ease: 'power4.out', scrollTrigger: { ...common, start: 'left 78%' } }
+            );
+          }
+
+          const line = panel.querySelector('.js-process-line');
+          if (line) {
+            gsap.fromTo(
+              line,
+              { scaleX: 0 },
+              { scaleX: 1, duration: 0.8, ease: 'power2.inOut', delay: 0.15, scrollTrigger: { ...common, start: 'left 78%' } }
+            );
+          }
+
+          const desc = panel.querySelector('.js-process-desc');
+          if (desc) {
+            gsap.fromTo(
+              desc,
+              { opacity: 0, y: 24 },
+              { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.2, scrollTrigger: { ...common, start: 'left 78%' } }
+            );
+          }
+        });
+
+        return () => {
+          track.style.width = '';
+        };
+      });
+
+      // ─── MOBILE: stacked vertical panels ────────────────────────────
+      mm.add('(max-width: 767px)', () => {
+        panels.forEach((panel) => {
+          const common = { trigger: panel, start: 'top 82%', toggleActions: 'play none none reverse' as const };
+
+          const tag = panel.querySelector('.js-process-tag');
+          if (tag) gsap.fromTo(tag, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out', scrollTrigger: common });
+
+          const title = panel.querySelector('.js-process-title');
+          if (title) gsap.fromTo(title, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', scrollTrigger: common });
+
+          const line = panel.querySelector('.js-process-line');
+          if (line) gsap.fromTo(line, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'power2.inOut', delay: 0.1, scrollTrigger: common });
+
+          const desc = panel.querySelector('.js-process-desc');
+          if (desc) gsap.fromTo(desc, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.15, scrollTrigger: common });
+        });
+      });
+    }, section);
+
+    return () => ctx.revert();
+  };
+
+  initProcessScroll();
+  document.addEventListener('astro:page-load', initProcessScroll);
+</script>

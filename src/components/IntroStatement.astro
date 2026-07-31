@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  paragraph: string;
+}
+
+const { title, paragraph } = Astro.props;
+---
+
+<section class="reveal relative overflow-hidden py-24 md:py-32 bg-brand-primary-light/10">
+  <!-- Content -->
+  <div class="relative z-10 max-w-[900px] mx-auto px-6 lg:px-10 text-center">
+    <div class="w-16 h-[2px] bg-brand-secondary mx-auto mb-8"></div>
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white leading-tight mb-6">
+      {title}
+    </h2>
+    <p class="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+      {paragraph}
+    </p>
+  </div>
+</section>

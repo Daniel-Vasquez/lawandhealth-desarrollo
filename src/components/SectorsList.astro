@@ -1,0 +1,54 @@
+---
+interface Sector {
+  title: string;
+  items: string[];
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  sectors: Sector[];
+}
+
+const { eyebrow = 'Cobertura', title, sectors } = Astro.props;
+---
+
+<section id="sectores" class="reveal bg-brand-primary py-20 md:py-28">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+    <!-- Header -->
+    <div class="mb-12 md:mb-16 max-w-2xl">
+      <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-3">{eyebrow}</p>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white leading-tight">
+        {title}
+      </h2>
+    </div>
+
+    <!-- Sectors -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
+      {
+        sectors.map((sector) => (
+          <div class="bg-brand-primary p-8 md:p-10">
+            <div class="flex items-center gap-3 mb-6 pb-6 border-b border-white/10">
+              <div class="w-10 h-10 flex-shrink-0 bg-brand-secondary/10 border border-brand-secondary/40 flex items-center justify-center">
+                <svg class="w-5 h-5 text-brand-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                </svg>
+              </div>
+              <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter text-white">
+                {sector.title}
+              </h3>
+            </div>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+              {sector.items.map((item) => (
+                <li class="flex items-center gap-2 text-sm text-white/70">
+                  <span class="w-1 h-1 rounded-full bg-brand-secondary flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

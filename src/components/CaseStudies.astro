@@ -1,0 +1,52 @@
+---
+interface CaseStudy {
+  problema: string;
+  solucion: string;
+  resultado: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  cases: CaseStudy[];
+}
+
+const { eyebrow = 'Resultados', title, cases } = Astro.props;
+---
+
+<section id="casos-de-exito" class="reveal bg-brand-primary py-20 md:py-28">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+    <!-- Header -->
+    <div class="mb-12 md:mb-16 max-w-2xl">
+      <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-3">{eyebrow}</p>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white leading-tight">
+        {title}
+      </h2>
+    </div>
+
+    <!-- Cases -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+      {
+        cases.map((item, i) => (
+          <div class="bg-brand-primary p-8 flex flex-col">
+            <span class="block font-black text-brand-secondary/40 mb-6" style={{ fontSize: '2.5rem', lineHeight: 1 }}>
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="mb-5">
+              <p class="text-[10px] font-black uppercase tracking-[0.3em] text-brand-secondary mb-1">Problema</p>
+              <p class="text-sm text-white/70 leading-relaxed">{item.problema}</p>
+            </div>
+            <div class="mb-5">
+              <p class="text-[10px] font-black uppercase tracking-[0.3em] text-brand-secondary mb-1">Solución</p>
+              <p class="text-sm text-white/70 leading-relaxed">{item.solucion}</p>
+            </div>
+            <div>
+              <p class="text-[10px] font-black uppercase tracking-[0.3em] text-brand-secondary mb-1">Resultado</p>
+              <p class="text-sm text-white/70 leading-relaxed">{item.resultado}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

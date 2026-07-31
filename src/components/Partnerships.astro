@@ -12,21 +12,22 @@ interface Props {
 const { partners } = Astro.props;
 ---
 
-<section id="partnerships" class="bg-[#0d0d0d] py-20 md:py-28">
+<section id="clientes" class="reveal bg-brand-primary-light/10 py-20 md:py-28">
   <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
     <!-- Header -->
-    <div class="mb-14 md:mb-20">
-      <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-3">Sponsors</p>
+    <div class="mb-14 md:mb-20 text-center">
+      <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-3">Confianza</p>
       <h2 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-white leading-none">
-        Partnerships
+        Empresas que han confiado en Law &amp; Health
       </h2>
+      <p class="text-white/40 text-sm mt-4">Logotipos pendientes de autorización por parte de cada cliente.</p>
     </div>
 
     <!-- Partners grid -->
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-white/5">
       {
         partners.map((partner) => (
-          <div class="group bg-[#0d0d0d] p-8 md:p-10 flex items-center justify-center aspect-[3/2] hover:bg-white/5 transition-colors duration-300">
+          <div class="group bg-brand-primary p-8 md:p-10 flex items-center justify-center aspect-[3/2] hover:bg-white/5 transition-colors duration-300">
             {partner.logo ? (
               <img
                 src={partner.logo}

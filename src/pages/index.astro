@@ -1,107 +1,241 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation';
-import HeroCanvas from '../components/HeroCanvas';
-import TrackTiles from '../components/TrackTiles.astro';
-import HelmetCarousel from '../components/HelmetCarousel';
-import MilestonesScroll from '../components/MilestonesScroll';
+import Hero from '../components/Hero.astro';
+import ChallengesGrid from '../components/ChallengesGrid.astro';
+import IntroStatement from '../components/IntroStatement.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import SectorsList from '../components/SectorsList.astro';
+import ProcessScroll from '../components/ProcessScroll.astro';
 import Partnerships from '../components/Partnerships.astro';
-import StoreSection from '../components/StoreSection.astro';
-import SocialFeed from '../components/SocialFeed.astro';
+import CaseStudies from '../components/CaseStudies.astro';
+import FAQ from '../components/FAQ';
+import FinalCTA from '../components/FinalCTA.astro';
 import Footer from '../components/Footer.astro';
 
+const CONTACT_HREF = '#contacto';
+const CONTACT_MAILTO = 'mailto:contacto@lawandhealth.mx';
+
 const navLinks = [
-  { label: 'On Track', href: '#on-track' },
-  { label: 'Off Track', href: '#off-track' },
-  { label: 'Partnerships', href: '#partnerships' },
-  { label: 'Social', href: '#social' },
-  { label: 'Store', href: 'https://store.lawandhealth.com', external: true },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Sectores', href: '#sectores' },
+  { label: 'Proceso', href: '#proceso' },
+  { label: 'Casos de Éxito', href: '#casos-de-exito' },
+  { label: 'FAQ', href: '#faq' },
 ];
 
-const socialLinks = [
-  { name: 'Instagram', href: 'https://www.instagram.com/lawandhealth' },
-  { name: 'TikTok', href: 'https://www.tiktok.com/@lawandhealth' },
-  { name: 'YouTube', href: 'https://www.youtube.com/lawandhealth' },
-  { name: 'X', href: 'https://twitter.com/lawandhealth' },
-  { name: 'Twitch', href: 'https://www.twitch.tv/lawandhealth' },
+const heroIndicators = [
+  { label: 'Más de 150 empresas atendidas.' },
+  { label: 'Especialistas en Regulación Sanitaria.' },
+  { label: 'Atención en toda la República Mexicana.' },
+  { label: 'Respuesta en menos de 24 horas.' },
 ];
 
-const trackTiles = [
+const challenges = [
+  { title: 'Verificación sanitaria' },
+  { title: 'Suspensión de actividades' },
+  { title: 'Multas administrativas' },
+  { title: 'Apertura de establecimientos' },
+  { title: 'Regularización documental' },
+  { title: 'Permisos y autorizaciones' },
+  { title: 'Publicidad de productos o servicios regulados' },
+  { title: 'Certificaciones' },
+];
+
+const services = [
   {
-    id: 'on-track',
-    title: 'On Track',
-    subtitle: 'Performance & Racing',
-    image: '/images/on-track.jpg',
-    href: '#on-track',
+    title: 'Cumplimiento regulatorio',
+    description: 'Asesoría para cumplir con la normativa sanitaria aplicable.',
   },
   {
-    id: 'off-track',
-    title: 'Off Track',
-    subtitle: 'Lifestyle & Content',
-    image: '/images/off-track.jpg',
-    href: '#off-track',
+    title: 'Permisos, licencias y autorizaciones',
+    description: 'Gestión e integración de expedientes para procesos regulatorios.',
+  },
+  {
+    title: 'Atención de verificaciones',
+    description: 'Acompañamiento durante verificaciones sanitarias y requerimientos de la autoridad.',
+  },
+  {
+    title: 'Defensa administrativa',
+    description: 'Atención de multas, procedimientos administrativos y medios de defensa.',
   },
 ];
 
-const helmets = [
-  { year: 2025, name: 'Season Opener', image: '/images/helmet-2025.jpg', color: '#ff6600' },
-  { year: 2024, name: 'Discoball', image: '/images/helmet-2024.jpg', color: '#c0c0c0' },
-  { year: 2023, name: 'Papaya Flash', image: '/images/helmet-2023.jpg', color: '#ff8700' },
-  { year: 2022, name: 'Neon Chrome', image: '/images/helmet-2022.jpg', color: '#00ffcc' },
-  { year: 2021, name: 'Cyberpunk', image: '/images/helmet-2021.jpg', color: '#b5f900' },
-  { year: 2020, name: 'Carbon Series', image: '/images/helmet-2020.jpg', color: '#333333' },
-  { year: 2019, name: 'Rookie Edition', image: '/images/helmet-2019.jpg', color: '#ff3333' },
+const whyChooseUs = [
+  {
+    title: 'Especialización',
+    description: 'Equipo conformado por especialistas en distintas áreas de la Regulación Sanitaria.',
+  },
+  {
+    title: 'Experiencia',
+    description: 'Más de 150 empresas atendidas desde 2018.',
+  },
+  {
+    title: 'Atención personalizada',
+    description: 'Estrategias desarrolladas con base en la situación y necesidades de cada empresa.',
+  },
+  {
+    title: 'Cobertura nacional',
+    description: 'Atención para empresas de toda la República Mexicana.',
+  },
 ];
 
-const partners = [
-  { name: 'McLaren' },
-  { name: 'Ralph Lauren' },
-  { name: 'PlayStation' },
-  { name: 'Google' },
-  { name: 'Monster Energy' },
-  { name: 'Bell Helmets' },
-  { name: 'Quadrant' },
-  { name: 'Oakley' },
-  { name: 'eBay' },
-  { name: 'Hilton' },
+const sectors = [
+  {
+    title: 'Sector Salud',
+    items: [
+      'Hospitales',
+      'Clínicas',
+      'Consultorios',
+      'Laboratorios',
+      'Farmacias',
+      'Servicios de diagnóstico',
+      'Distribuidores de medicamentos',
+      'Dispositivos médicos',
+    ],
+  },
+  {
+    title: 'Sector Alimenticio',
+    items: [
+      'Fabricantes',
+      'Productores',
+      'Comercializadores',
+      'Restaurantes',
+      'Bebidas alcohólicas',
+      'Suplementos alimenticios',
+    ],
+  },
 ];
 
-const socialPosts = [
-  { platform: 'instagram' as const, image: '/images/social-1.jpg', href: 'https://www.instagram.com/lawandhealth', alt: 'Lawandhealth on Instagram' },
-  { platform: 'tiktok' as const, image: '/images/social-2.jpg', href: 'https://www.tiktok.com/@lawandhealth', alt: 'Lawandhealth on TikTok' },
-  { platform: 'youtube' as const, image: '/images/social-3.jpg', href: 'https://www.youtube.com/lawandhealth', alt: 'Lawandhealth on YouTube' },
-  { platform: 'instagram' as const, image: '/images/social-4.jpg', href: 'https://www.instagram.com/lawandhealth', alt: 'Lawandhealth on Instagram' },
-  { platform: 'x' as const, image: '/images/social-5.jpg', href: 'https://twitter.com/lawandhealth', alt: 'Lawandhealth on X' },
-  { platform: 'instagram' as const, image: '/images/social-6.jpg', href: 'https://www.instagram.com/lawandhealth', alt: 'Lawandhealth on Instagram' },
-  { platform: 'tiktok' as const, image: '/images/social-7.jpg', href: 'https://www.tiktok.com/@lawandhealth', alt: 'Lawandhealth on TikTok' },
-  { platform: 'youtube' as const, image: '/images/social-8.jpg', href: 'https://www.youtube.com/lawandhealth', alt: 'Lawandhealth on YouTube' },
+const processSteps = [
+  { title: 'Evaluación del caso', description: 'Analizamos la situación y los objetivos de la empresa.' },
+  { title: 'Estrategia regulatoria', description: 'Definimos el plan de acción.' },
+  { title: 'Implementación', description: 'Ejecutamos el procedimiento y acompañamos el proceso.' },
+  {
+    title: 'Seguimiento',
+    description: 'Brindamos apoyo continuo conforme a las necesidades regulatorias del cliente.',
+  },
+];
+
+// Pendiente: sustituir por los logotipos reales una vez autorizados por cada cliente.
+const clients = Array.from({ length: 10 }, (_, i) => ({
+  name: `Empresa ${String(i + 1).padStart(2, '0')}`,
+}));
+
+// Pendiente: sustituir por los tres casos de éxito reales (Problema / Solución / Resultado).
+const caseStudies = [
+  {
+    problema: 'Contenido pendiente de definir con el cliente.',
+    solucion: 'Contenido pendiente de definir con el cliente.',
+    resultado: 'Contenido pendiente de definir con el cliente.',
+  },
+  {
+    problema: 'Contenido pendiente de definir con el cliente.',
+    solucion: 'Contenido pendiente de definir con el cliente.',
+    resultado: 'Contenido pendiente de definir con el cliente.',
+  },
+  {
+    problema: 'Contenido pendiente de definir con el cliente.',
+    solucion: 'Contenido pendiente de definir con el cliente.',
+    resultado: 'Contenido pendiente de definir con el cliente.',
+  },
+];
+
+// Pendiente: redactar las respuestas definitivas de cada pregunta.
+const faqItems = [
+  {
+    question: '¿Atienden empresas de toda la República Mexicana?',
+    answer: 'Respuesta pendiente de redactar por el equipo de Law & Health.',
+  },
+  {
+    question: '¿Atienden procedimientos urgentes?',
+    answer: 'Respuesta pendiente de redactar por el equipo de Law & Health.',
+  },
+  {
+    question: '¿Qué sucede después de enviar el formulario?',
+    answer: 'Respuesta pendiente de redactar por el equipo de Law & Health.',
+  },
+  {
+    question: '¿Cuánto tiempo tarda el primer contacto?',
+    answer: 'Respuesta pendiente de redactar por el equipo de Law & Health.',
+  },
 ];
 ---
 
-<Layout
-  title="Lawandhealth | Official Website"
-  description="Official website of Lawandhealth – 2025 McLaren Formula 1 Driver. Racing news, partnerships, and more."
->
+<Layout>
   <Navigation
     client:load
     links={navLinks}
-    socialLinks={socialLinks}
+    ctaLabel="Solicitar evaluación"
+    ctaHref={CONTACT_HREF}
   />
 
   <main>
-    <HeroCanvas client:load nextRace="Canadian GP" raceDate="Jun 13–15" />
+    <Hero
+      title="Asesoría Especializada en Regulación Sanitaria para Empresas del Sector Salud y Alimenticio"
+      paragraph="Ayudamos a hospitales, clínicas, laboratorios, farmacias y empresas del sector alimenticio a cumplir con la regulación sanitaria, prevenir riesgos y atender procedimientos ante la autoridad con el respaldo de un equipo de especialistas."
+      indicators={heroIndicators}
+      ctaLabel="Solicitar una evaluación regulatoria"
+      ctaHref={CONTACT_HREF}
+    />
 
-    <TrackTiles tiles={trackTiles} />
+    <ChallengesGrid
+      title="¿Tu empresa enfrenta alguno de estos desafíos?"
+      challenges={challenges}
+      ctaLabel="Hablar con un especialista"
+      ctaHref={CONTACT_HREF}
+    />
 
-    <HelmetCarousel client:visible helmets={helmets} />
+    <IntroStatement
+      title="Protegemos la operación de empresas del sector salud y alimenticio."
+      paragraph="La regulación sanitaria influye directamente en la continuidad de una empresa. Law & Health desarrolla estrategias legales y regulatorias para prevenir riesgos, atender procedimientos administrativos y fortalecer el cumplimiento normativo."
+    />
 
-    <MilestonesScroll client:visible />
+    <FeatureGrid
+      id="servicios"
+      eyebrow="Qué hacemos"
+      title="Servicios especializados"
+      features={services}
+      background="primary"
+    />
 
-    <Partnerships partners={partners} />
+    <FeatureGrid
+      id="por-que-elegirnos"
+      eyebrow="Diferenciadores"
+      title="¿Por qué elegir Law & Health?"
+      features={whyChooseUs}
+      background="tint"
+    />
 
-    <StoreSection storeUrl="https://store.lawandhealth.com" />
+    <SectorsList
+      title="Sectores que asesoramos"
+      sectors={sectors}
+    />
 
-    <SocialFeed posts={socialPosts} />
+    <ProcessScroll
+      title="Nuestro proceso"
+      steps={processSteps}
+    />
+
+    <Partnerships partners={clients} />
+
+    <CaseStudies
+      title="Casos de éxito"
+      cases={caseStudies}
+    />
+
+    <FAQ
+      client:visible
+      title="Preguntas frecuentes"
+      items={faqItems}
+    />
+
+    <FinalCTA
+      title="Solicita una evaluación regulatoria para tu empresa"
+      paragraph="Si tu empresa pertenece al sector salud o alimenticio y requiere asesoría en regulación sanitaria, agenda una evaluación con uno de nuestros especialistas. Analizaremos tu situación y definiremos la mejor estrategia para atenderla."
+      ctaLabel="Solicitar una evaluación regulatoria"
+      ctaHref={CONTACT_MAILTO}
+    />
   </main>
 
   <Footer navLinks={navLinks} />
