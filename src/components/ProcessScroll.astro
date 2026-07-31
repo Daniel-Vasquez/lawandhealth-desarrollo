@@ -50,15 +50,12 @@ const dotInactive = isLight && !hasAnyImage ? 'rgba(2,28,8,0.15)' : 'rgba(255,25
         <div class="js-process-panel relative w-full md:w-screen h-screen flex-shrink-0 overflow-hidden flex items-center">
           {step.image && (
             <div class="absolute inset-0 z-0">
-              <picture class="w-full h-full block">
-                <source media="(max-width: 767px)" srcset={step.image.replace('.jpg', '-mobile.jpg')} />
-                <img
-                  src={step.image}
-                  alt=""
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </picture>
+              <img
+                src={step.image}
+                alt=""
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
               <div class="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/70 to-brand-primary/40" />
               <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/85 via-brand-primary/25 to-transparent" />
             </div>

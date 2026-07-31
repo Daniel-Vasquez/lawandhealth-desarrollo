@@ -1,0 +1,29 @@
+{"message":"connected.","label":"vite","level":"info"}
+{"message":"Generated 0ms","label":"types","level":"info"}
+{"message":"connected.","label":"vite","level":"info"}
+{"message":" astro  v7.1.6 ready in 1360 ms\n┃ Local    http://localhost:4321/\n┃ Network  use --host to expose","label":"SKIP_FORMAT","level":"info"}
+{"message":"watching for file changes...","label":null,"level":"info"}
+{"message":"[200] / 19ms","label":null,"level":"info"}
+{"message":"[200] / 14ms","label":null,"level":"info"}
+{"message":"Files in the public directory are served at the root path.\nInstead of /public/images/hero-dark.webp, use /images/hero-dark.webp.","label":"vite","level":"warn"}
+{"message":"Files in the public directory are served at the root path.\nInstead of /public/images/hero-light.webp, use /images/hero-light.webp.","label":"vite","level":"warn"}
+{"message":"dependencies optimized: gsap, gsap/ScrollTrigger","label":"vite","level":"info"}
+{"message":"[200] / 11ms","label":null,"level":"info"}
+{"message":"Files in the public directory are served at the root path.\nInstead of /public/images/hero-light.webp, use /images/hero-light.webp.","label":"vite","level":"warn"}
+{"message":"Files in the public directory are served at the root path.\nInstead of /public/images/hero-dark.webp, use /images/hero-dark.webp.","label":"vite","level":"warn"}
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EPERM: operation not permitted, open '/Users/danielvasquez/Documents/Proyectos/project-astro/lawandhealth-desarrollo/public/images/hero-light.webp'
+Emitted 'error' event on ReadStream instance at:
+[90m    at emitErrorNT (node:internal/streams/destroy:170:8)[39m
+[90m    at emitErrorCloseNT (node:internal/streams/destroy:129:3)[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)[39m {
+  errno: [33m-1[39m,
+  code: [32m'EPERM'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/danielvasquez/Documents/Proyectos/project-astro/lawandhealth-desarrollo/public/images/hero-light.webp'[39m
+}
+
+Node.js v22.22.2
