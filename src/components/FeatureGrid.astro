@@ -10,38 +10,56 @@ interface Props {
   eyebrow?: string;
   title: string;
   features: Feature[];
-  theme?: 'dark' | 'light';
+  theme?: "dark" | "light";
 }
 
-const { id, eyebrow, title, features, theme = 'dark' } = Astro.props;
-const isLight = theme === 'light';
+const { id, eyebrow, title, features, theme = "dark" } = Astro.props;
+const isLight = theme === "light";
 
-const sectionBg = isLight ? 'bg-white' : 'bg-brand-primary';
-const eyebrowText = isLight ? 'text-brand-primary-light' : 'text-brand-secondary';
-const headingText = isLight ? 'text-brand-primary' : 'text-white';
-const gridBg = isLight ? 'bg-black/5' : 'bg-white/5';
-const cardBg = isLight ? 'bg-white' : 'bg-brand-primary';
-const cardTitleText = isLight ? 'text-brand-primary' : 'text-white';
-const cardBodyText = isLight ? 'text-brand-primary/70' : 'text-white/60';
-const watermarkText = isLight ? 'text-brand-primary/10' : 'text-brand-secondary/40';
-const imageOverlay = isLight ? 'bg-white/40' : 'bg-brand-primary/40';
+const sectionBg = isLight ? "bg-white" : "bg-brand-primary";
+const eyebrowText = isLight
+  ? "text-brand-primary-light"
+  : "text-brand-secondary";
+const headingText = isLight ? "text-brand-primary" : "text-white";
+const gridBg = isLight ? "bg-black/5" : "bg-white/5";
+const cardBg = isLight ? "bg-white" : "bg-brand-primary";
+const cardTitleText = isLight ? "text-brand-primary" : "text-white";
+const cardBodyText = isLight ? "text-brand-primary/70" : "text-white/60";
+const watermarkText = isLight
+  ? "text-brand-primary/10"
+  : "text-brand-secondary/40";
+const imageOverlay = isLight ? "bg-white/40" : "bg-brand-primary/40";
 ---
 
 <section id={id} class={`reveal ${sectionBg} py-20 md:py-28`}>
   <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
     <!-- Header -->
     <div class="mb-12 md:mb-16 max-w-2xl">
-      {eyebrow && <p class={`text-xs font-bold uppercase tracking-[0.3em] ${eyebrowText} mb-3`}>{eyebrow}</p>}
-      <h2 class={`text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter ${headingText} leading-tight`}>
+      {
+        eyebrow && (
+          <p
+            class={`text-xs font-bold uppercase tracking-[0.3em] ${eyebrowText} mb-3`}
+          >
+            {eyebrow}
+          </p>
+        )
+      }
+      <h2
+        class={`text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter ${headingText} leading-tight`}
+      >
         {title}
       </h2>
     </div>
 
     <!-- Grid -->
-    <div class={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px ${gridBg}`}>
+    <div
+      class={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px ${gridBg}`}
+    >
       {
         features.map((feature, i) => (
-          <div class={`group relative ${cardBg} p-8 flex flex-col overflow-hidden`}>
+          <div
+            class={`group relative ${cardBg} p-8 flex flex-col overflow-hidden`}
+          >
             {feature.image ? (
               <div class="relative -mx-8 -mt-8 mb-6 aspect-[4/3] overflow-hidden">
                 <img
@@ -53,12 +71,21 @@ const imageOverlay = isLight ? 'bg-white/40' : 'bg-brand-primary/40';
                 <div class={`absolute inset-0 ${imageOverlay}`} />
               </div>
             ) : (
-              <span class={`block font-black ${watermarkText} mb-6`} style={{ fontSize: '2.5rem', lineHeight: 1 }}>
-                {String(i + 1).padStart(2, '0')}
+              <span
+                class={`block font-black ${watermarkText} mb-6`}
+                style={{ fontSize: "2.5rem", lineHeight: 1 }}
+              >
+                {String(i + 1).padStart(2, "0")}
               </span>
             )}
-            <h3 class={`text-lg font-black uppercase tracking-tight ${cardTitleText} mb-2`}>{feature.title}</h3>
-            <p class={`text-sm ${cardBodyText} leading-relaxed`}>{feature.description}</p>
+            <h3
+              class={`text-lg font-black uppercase tracking-tight ${cardTitleText} mb-2`}
+            >
+              {feature.title}
+            </h3>
+            <p class={`text-sm ${cardBodyText} leading-relaxed`}>
+              {feature.description}
+            </p>
           </div>
         ))
       }
