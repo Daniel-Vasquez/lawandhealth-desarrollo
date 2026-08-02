@@ -98,33 +98,6 @@ const whyChooseUs = [
   },
 ];
 
-const sectors = [
-  {
-    title: "Sector Salud",
-    items: [
-      "Hospitales",
-      "Clínicas",
-      "Consultorios",
-      "Laboratorios",
-      "Farmacias",
-      "Servicios de diagnóstico",
-      "Distribuidores de medicamentos",
-      "Dispositivos médicos",
-    ],
-  },
-  {
-    title: "Sector Alimenticio",
-    items: [
-      "Fabricantes",
-      "Productores",
-      "Comercializadores",
-      "Restaurantes",
-      "Bebidas alcohólicas",
-      "Suplementos alimenticios",
-    ],
-  },
-];
-
 const processSteps = [
   {
     title: "Evaluación del caso",
@@ -241,11 +214,7 @@ const faqItems = [
       theme="light"
     />
 
-    <SectorsList
-      title="Sectores que asesoramos"
-      sectors={sectors}
-      theme="dark"
-    />
+    <SectorsList title="Sectores que asesoramos" theme="dark" />
 
     <ProcessScroll title="Nuestro proceso" steps={processSteps} theme="light" />
 
