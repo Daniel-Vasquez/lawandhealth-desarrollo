@@ -54,7 +54,7 @@ Describir cada uno, qué es, cómo funciona, para qué sirve
 
 **Párrafo** 
 
-La regulación sanitaria influye directamente en la continuidad de una empresa. Lawandhealth desarrolla estrategias legales y regulatorias para prevenir riesgos, atender procedimientos administrativos y fortalecer el cumplimiento normativo. 
+La regulación sanitaria influye directamente en la continuidad de una empresa. Law & Health desarrolla estrategias legales y regulatorias para prevenir riesgos, atender procedimientos administrativos y fortalecer el cumplimiento normativo. 
 
  
 
@@ -100,7 +100,7 @@ Atención de multas, procedimientos administrativos y medios de defensa.
 
 **H2** 
 
-**¿Por qué elegir Lawandhealth?** 
+**¿Por qué elegir Law & Health?** 
 
 **H3** 
 
@@ -210,7 +210,7 @@ Brindamos apoyo continuo conforme a las necesidades regulatorias del cliente.
 
 **H2** 
 
-**Empresas que han confiado en Lawandhealth** 
+**Empresas que han confiado en Law & Health** 
 
 **Pendiente:** Integrar logotipos autorizados. 
 

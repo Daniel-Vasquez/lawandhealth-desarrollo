@@ -1,4 +1,6 @@
 ---
+import EvaluationForm from "./EvaluationForm";
+
 interface TrustIndicator {
   label: string;
 }
@@ -136,6 +138,8 @@ const {
       </svg>
     </a>
   </div>
+
+  <EvaluationForm client:load />
 </section>
 
 <script>
