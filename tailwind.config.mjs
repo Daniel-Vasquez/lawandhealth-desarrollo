@@ -17,6 +17,25 @@ export default {
       screens: {
         xs: '480px',
       },
+      keyframes: {
+        'whatsapp-pulse': {
+          '0%, 88%, 100%': {
+            transform: 'scale(1) translateY(0)',
+            boxShadow: '0 4px 14px rgba(37, 211, 102, 0.35)',
+          },
+          '92%': {
+            transform: 'scale(1.08) translateY(-2px)',
+            boxShadow: '0 8px 22px rgba(37, 211, 102, 0.55)',
+          },
+          '96%': {
+            transform: 'scale(1) translateY(0)',
+            boxShadow: '0 4px 14px rgba(37, 211, 102, 0.35)',
+          },
+        },
+      },
+      animation: {
+        'whatsapp-pulse': 'whatsapp-pulse 5s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

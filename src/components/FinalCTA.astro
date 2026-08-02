@@ -17,7 +17,7 @@ const bodyText = isLight ? "text-white/70" : "text-brand-primary/70";
 
 <section
   id="contacto"
-  class={`reveal relative overflow-hidden min-h-[80vh] flex items-center ${sectionBg}`}
+  class={`js-final-cta reveal relative overflow-hidden min-h-[80vh] flex items-center ${sectionBg}`}
 >
   <!-- Decorative background -->
   <div
@@ -84,6 +84,6 @@ const bodyText = isLight ? "text-white/70" : "text-brand-primary/70";
     >
       {paragraph}
     </p>
-    <EvaluationForm client:visible variant="embedded" />
+    <EvaluationForm client:visible />
   </div>
 </section>

@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useState } from 'react';
+import { useId, useMemo, useState } from 'react';
 
 type FormData = {
   fullName: string;
@@ -74,7 +74,6 @@ const URGENCY_OPTIONS = [
 const STATUS_OPTIONS = ['En operación', 'En proceso de apertura', 'Proyecto nuevo'];
 
 const WHATSAPP_NUMBER = '525530756248';
-const SCROLL_THRESHOLD = 150;
 
 const fieldClasses =
   'w-full border border-black/15 px-3 py-2 text-sm text-black placeholder-black/30 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary';
@@ -136,39 +135,13 @@ function SelectField({ id, label, value, onChange, options }: SelectFieldProps) 
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 interface EvaluationFormProps {
-  variant?: 'floating' | 'embedded';
+  onClose?: () => void;
 }
 
-export default function EvaluationForm({ variant = 'floating' }: EvaluationFormProps) {
-  const isFloating = variant === 'floating';
+export default function EvaluationForm({ onClose }: EvaluationFormProps) {
   const uid = useId();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA);
-  const [isPastThreshold, setIsPastThreshold] = useState(false);
-  const [isHeroInView, setIsHeroInView] = useState(true);
-  const [isDismissed, setIsDismissed] = useState(false);
-
-  useEffect(() => {
-    if (!isFloating) return;
-
-    const handleScroll = () => setIsPastThreshold(window.scrollY > SCROLL_THRESHOLD);
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    const heroEl = document.querySelector<HTMLElement>('.js-hero');
-    let observer: IntersectionObserver | null = null;
-    if (heroEl) {
-      observer = new IntersectionObserver(([entry]) => setIsHeroInView(entry.isIntersecting), {
-        threshold: 0,
-      });
-      observer.observe(heroEl);
-    }
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      observer?.disconnect();
-    };
-  }, [isFloating]);
 
   const updateField = (field: keyof FormData, value: string) => {
     setFormData((prev) => {
@@ -238,15 +211,8 @@ export default function EvaluationForm({ variant = 'floating' }: EvaluationFormP
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const isVisible = isFloating ? isPastThreshold && isHeroInView && !isDismissed : true;
-
-  const containerClasses = isFloating
-    ? `fixed z-30 bottom-4 right-4 sm:bottom-6 sm:right-6 w-[calc(100vw-2rem)] sm:w-[380px] max-h-[80vh] overflow-y-auto bg-white shadow-2xl transition-transform duration-500 ease-out ${isVisible ? 'translate-y-0 pointer-events-auto' : 'translate-y-[150%] pointer-events-none'
-    }`
-    : 'relative w-full max-w-md mx-auto bg-white shadow-2xl text-left';
-
   return (
-    <div className={containerClasses} aria-hidden={isFloating ? !isVisible : undefined}>
+    <div className="relative w-full max-w-md mx-auto bg-white shadow-2xl text-left">
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -258,10 +224,10 @@ export default function EvaluationForm({ variant = 'floating' }: EvaluationFormP
               del primer contacto.
             </p>
           </div>
-          {isFloating && (
+          {onClose && (
             <button
               type="button"
-              onClick={() => setIsDismissed(true)}
+              onClick={onClose}
               aria-label="Cerrar formulario"
               className="flex-shrink-0 text-black/40 hover:text-black transition-colors duration-200 text-xl leading-none"
             >
