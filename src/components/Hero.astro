@@ -32,7 +32,7 @@ const {
     style={{
       backgroundImage: "url('images/hero-light.webp')",
       backgroundSize: "cover",
-      backgroundPosition: "center",
+      backgroundPosition: "85% 50%",
     }}
   >
   </div>
@@ -54,15 +54,15 @@ const {
   <canvas class="js-hero-spotlight-canvas hidden"></canvas>
 
   <!-- Legibility overlay — flat/strong on mobile (text spans full width), side gradient on desktop (text sits left) -->
-  <div
-    class="absolute inset-0 z-[2] bg-brand-primary/80 md:hidden pointer-events-none"
-  >
+  <div class="absolute inset-0 z-[2] bg-brand-primary/40 pointer-events-none">
   </div>
   <div
     class="absolute inset-0 z-[2] hidden md:block from-brand-primary via-brand-primary/75 to-brand-primary/30 pointer-events-none"
   >
   </div>
-  <div class="absolute inset-0 z-[2] bg-brand-primary/30 pointer-events-none">
+  <div
+    class="absolute inset-0 z-[2] bg-brand-primary/60 pointer-events-none md:bg-brand-primary/30"
+  >
   </div>
 
   <!-- Accent top bar -->
@@ -80,14 +80,14 @@ const {
     </p>
 
     <h1
-      class="js-hero-title font-black leading-[1.05] text-white max-w-4xl"
+      class="js-hero-title font-black leading-[1.05] text-white max-w-5xl"
       style={{ fontSize: "clamp(32px, 5.5vw, 64px)" }}
     >
       {title}
     </h1>
 
     <p
-      class="js-hero-paragraph text-base md:text-lg text-white/70 max-w-2xl mt-6 leading-relaxed"
+      class="js-hero-paragraph text-base md:text-lg text-white/70 max-w-3xl mt-6 leading-relaxed"
     >
       {paragraph}
     </p>
