@@ -1,50 +1,96 @@
 ---
 interface Challenge {
   title: string;
+  description: string;
+  image: string;
 }
 
 interface Props {
   eyebrow?: string;
   title: string;
-  challenges: Challenge[];
   ctaLabel: string;
   ctaHref: string;
 }
 
-const { eyebrow = 'Diagnóstico', title, challenges, ctaLabel, ctaHref } = Astro.props;
+const { eyebrow = "Diagnóstico", title, ctaLabel, ctaHref } = Astro.props;
+
+const challenges: Challenge[] = [
+  {
+    title: "Recibiste una visita de COFEPRIS",
+    description:
+      "Atención especializada durante verificaciones sanitarias, requerimientos y procedimientos administrativos.",
+    image: "images/diagnostico/Visita de COFEPRIS.webp",
+  },
+  {
+    title: "Necesitas una Licencia Sanitaria o Aviso de Funcionamiento",
+    description:
+      "Acompañamiento para cumplir con los requisitos regulatorios y operar conforme a la normativa aplicable.",
+    image:
+      "images/diagnostico/Licencia Sanitaria o Aviso de Funcionamiento.webp",
+  },
+  {
+    title: "Debes cumplir con una Norma Oficial Mexicana (NOM)",
+    description:
+      "Asesoría para implementar y mantener el cumplimiento de la normativa correspondiente a tu actividad.",
+    image:
+      "images/diagnostico/Cumplimiento de Norma Oficial Mexicana (NOM).webp",
+  },
+  {
+    title: "Lanzarás un nuevo producto o servicio",
+    description:
+      "Planeación regulatoria para reducir riesgos antes de iniciar operaciones o salir al mercado.",
+    image: "images/diagnostico/Lanzamiento de nuevo producto o servicio.webp",
+  },
+  {
+    title: "Buscas regularizar tu empresa",
+    description:
+      "Estrategias para corregir incumplimientos y fortalecer el cumplimiento sanitario.",
+    image: "images/diagnostico/Regularización de empresa.webp",
+  },
+  {
+    title: "Necesitas asesoría regulatoria permanente",
+    description:
+      "Acompañamiento continuo para empresas que requieren operar con seguridad jurídica y regulatoria.",
+    image: "images/diagnostico/Asesoría regulatoria permanente.webp",
+  },
+];
 ---
 
 <section id="desafios" class="reveal bg-brand-primary py-20 md:py-28">
   <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
     <!-- Header -->
     <div class="mb-12 md:mb-16 max-w-2xl">
-      <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-3">{eyebrow}</p>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white leading-tight">
+      <p
+        class="text-xs font-bold uppercase tracking-[0.3em] text-brand-secondary mb-3"
+      >
+        {eyebrow}
+      </p>
+      <h2
+        class="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white leading-tight"
+      >
         {title}
       </h2>
     </div>
 
     <!-- Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {
         challenges.map((challenge) => (
-          <div class="group bg-brand-primary p-6 md:p-7 flex flex-col gap-4 hover:bg-brand-primary-light/10 transition-colors duration-300">
-            <svg
-              class="w-8 h-8 text-brand-secondary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-              />
-            </svg>
-            <p class="text-sm md:text-base font-bold text-white leading-snug">
-              {challenge.title}
-            </p>
+          <div class="group flex flex-col bg-brand-primary-light/10 overflow-hidden hover:bg-brand-primary-light/20 transition-colors duration-300">
+            <img
+              src={challenge.image}
+              alt={challenge.title}
+              class="w-full aspect-[4/3] object-cover h-52"
+              loading="lazy"
+            />
+            <div class="flex flex-col gap-2 p-6 md:p-7">
+              <p class="text-sm md:text-base font-bold text-white leading-snug">
+                {challenge.title}
+              </p>
+              <p class="text-sm text-white/60 leading-relaxed">
+                {challenge.description}
+              </p>
+            </div>
           </div>
         ))
       }
@@ -64,7 +110,8 @@ const { eyebrow = 'Diagnóstico', title, challenges, ctaLabel, ctaHref } = Astro
           stroke="currentColor"
           stroke-width="3"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+          ></path>
         </svg>
       </a>
     </div>
