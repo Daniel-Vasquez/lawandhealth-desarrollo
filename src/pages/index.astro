@@ -130,25 +130,6 @@ const clients = Array.from({ length: 10 }, (_, i) => ({
   name: `Empresa ${String(i + 1).padStart(2, "0")}`,
 }));
 
-// Pendiente: sustituir por los tres casos de éxito reales (Problema / Solución / Resultado).
-const caseStudies = [
-  {
-    problema: "Contenido pendiente de definir con el cliente.",
-    solucion: "Contenido pendiente de definir con el cliente.",
-    resultado: "Contenido pendiente de definir con el cliente.",
-  },
-  {
-    problema: "Contenido pendiente de definir con el cliente.",
-    solucion: "Contenido pendiente de definir con el cliente.",
-    resultado: "Contenido pendiente de definir con el cliente.",
-  },
-  {
-    problema: "Contenido pendiente de definir con el cliente.",
-    solucion: "Contenido pendiente de definir con el cliente.",
-    resultado: "Contenido pendiente de definir con el cliente.",
-  },
-];
-
 // Pendiente: redactar las respuestas definitivas de cada pregunta.
 const faqItems = [
   {
@@ -220,7 +201,7 @@ const faqItems = [
 
     <Partnerships partners={clients} theme="dark" />
 
-    <CaseStudies title="Casos de éxito" cases={caseStudies} theme="light" />
+    <CaseStudies title="Casos de éxito" />
 
     <FAQ
       client:visible

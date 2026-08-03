@@ -32,9 +32,14 @@ export default {
             boxShadow: '0 4px 14px rgba(37, 211, 102, 0.35)',
           },
         },
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(1rem)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
       animation: {
         'whatsapp-pulse': 'whatsapp-pulse 5s ease-in-out infinite',
+        'fade-up': 'fade-up 700ms ease-out both',
       },
     },
   },

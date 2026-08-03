@@ -1,63 +1,14 @@
 ---
-interface CaseStudy {
-  problema: string;
-  solucion: string;
-  resultado: string;
-}
+import CaseStudiesSlider from './CaseStudiesSlider';
 
 interface Props {
   eyebrow?: string;
   title: string;
-  cases: CaseStudy[];
-  theme?: 'dark' | 'light';
 }
 
-const { eyebrow = 'Resultados', title, cases, theme = 'dark' } = Astro.props;
-const isLight = theme === 'light';
-
-const sectionBg = isLight ? 'bg-white' : 'bg-brand-primary';
-const eyebrowText = isLight ? 'text-brand-primary-light' : 'text-brand-secondary';
-const headingText = isLight ? 'text-brand-primary' : 'text-white';
-const gridBg = isLight ? 'bg-black/5' : 'bg-white/5';
-const cardBg = isLight ? 'bg-white' : 'bg-brand-primary';
-const watermarkText = isLight ? 'text-brand-primary/10' : 'text-brand-secondary/40';
-const labelText = isLight ? 'text-brand-primary-light' : 'text-brand-secondary';
-const bodyText = isLight ? 'text-brand-primary/70' : 'text-white/70';
+const { eyebrow = 'Resultados', title } = Astro.props;
 ---
 
-<section id="casos-de-exito" class={`reveal ${sectionBg} py-20 md:py-28`}>
-  <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
-    <!-- Header -->
-    <div class="mb-12 md:mb-16 max-w-2xl">
-      <p class={`text-xs font-bold uppercase tracking-[0.3em] ${eyebrowText} mb-3`}>{eyebrow}</p>
-      <h2 class={`text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter ${headingText} leading-tight`}>
-        {title}
-      </h2>
-    </div>
-
-    <!-- Cases -->
-    <div class={`grid grid-cols-1 md:grid-cols-3 gap-px ${gridBg}`}>
-      {
-        cases.map((item, i) => (
-          <div class={`${cardBg} p-8 flex flex-col`}>
-            <span class={`block font-black ${watermarkText} mb-6`} style={{ fontSize: '2.5rem', lineHeight: 1 }}>
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <div class="mb-5">
-              <p class={`text-[10px] font-black uppercase tracking-[0.3em] ${labelText} mb-1`}>Problema</p>
-              <p class={`text-sm ${bodyText} leading-relaxed`}>{item.problema}</p>
-            </div>
-            <div class="mb-5">
-              <p class={`text-[10px] font-black uppercase tracking-[0.3em] ${labelText} mb-1`}>Solución</p>
-              <p class={`text-sm ${bodyText} leading-relaxed`}>{item.solucion}</p>
-            </div>
-            <div>
-              <p class={`text-[10px] font-black uppercase tracking-[0.3em] ${labelText} mb-1`}>Resultado</p>
-              <p class={`text-sm ${bodyText} leading-relaxed`}>{item.resultado}</p>
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  </div>
+<section id="casos-de-exito" class="reveal">
+  <CaseStudiesSlider client:load eyebrow={eyebrow} title={title} />
 </section>
