@@ -1,4 +1,5 @@
 import { useId, useMemo, useState } from 'react';
+import { submitToGoogleSheets } from '../services/googleSheets';
 
 type FormData = {
   fullName: string;
@@ -226,6 +227,7 @@ export default function EvaluationForm({ onClose }: EvaluationFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA);
   const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const updateField = (field: keyof FormData, value: string) => {
     setFormData((prev) => {
@@ -315,6 +317,15 @@ export default function EvaluationForm({ onClose }: EvaluationFormProps) {
   const handleSubmit = () => {
     STEP_FIELDS[3].forEach(markTouched);
     if (!isFormValid) return;
+
+    setIsSubmitting(true);
+    submitToGoogleSheets({
+      nombre: formData.fullName,
+      correo: formData.email,
+      telefono: formData.phone,
+      servicios: formData.subSector,
+    }).finally(() => setIsSubmitting(false));
+
     const message = buildWhatsAppMessage();
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -512,11 +523,11 @@ export default function EvaluationForm({ onClose }: EvaluationFormProps) {
               <button
                 type="button"
                 onClick={handleSubmit}
-                disabled={!isFormValid}
-                className={`inline-flex items-center gap-2 bg-brand-secondary text-black text-xs font-black uppercase tracking-widest px-5 py-3 transition-opacity duration-200 ${isFormValid ? 'opacity-100 cursor-pointer hover:bg-white' : 'opacity-40 cursor-not-allowed'
+                disabled={!isFormValid || isSubmitting}
+                className={`inline-flex items-center gap-2 bg-brand-secondary text-black text-xs font-black uppercase tracking-widest px-5 py-3 transition-opacity duration-200 ${isFormValid && !isSubmitting ? 'opacity-100 cursor-pointer hover:bg-white' : 'opacity-40 cursor-not-allowed'
                   }`}
               >
-                Iniciar conversación
+                {isSubmitting ? 'Procesando...' : 'Iniciar conversación'}
               </button>
             )}
           </div>
