@@ -323,7 +323,7 @@ export default function EvaluationForm({ onClose }: EvaluationFormProps) {
       nombre: formData.fullName,
       correo: formData.email,
       telefono: formData.phone,
-      servicios: formData.subSector,
+      servicio: formData.subSector,
     }).finally(() => setIsSubmitting(false));
 
     const message = buildWhatsAppMessage();

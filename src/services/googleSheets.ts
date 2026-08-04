@@ -2,7 +2,7 @@ export interface LeadData {
   nombre: string;
   correo: string;
   telefono: string;
-  servicios: string;
+  servicio: string;
 }
 
 const APPS_SCRIPT_URL = import.meta.env.PUBLIC_URL_DE_APPS_SCRIPT;
@@ -13,7 +13,7 @@ export async function submitToGoogleSheets(data: LeadData): Promise<void> {
       nombre: data.nombre,
       correo: data.correo,
       telefono: data.telefono,
-      servicios: data.servicios,
+      servicio: data.servicio,
     });
 
     await fetch(APPS_SCRIPT_URL, {
